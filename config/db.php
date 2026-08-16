@@ -53,6 +53,10 @@ try {
     }
 
 } catch (\PDOException $e) {
+    // Collect available environment variable keys for debugging
+    $serverKeys = array_keys($_SERVER);
+    $envKeys = array_keys($_ENV);
+    
     // Provide a beautiful error message to the user if DB connection fails
     ?>
     <!DOCTYPE html>
@@ -71,15 +75,15 @@ try {
                 justify-content: center;
                 height: 100vh;
                 margin: 0;
+                padding: 20px;
             }
             .error-card {
                 background: white;
                 padding: 2.5rem;
                 border-radius: 12px;
                 box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-                max-width: 500px;
+                max-width: 800px;
                 width: 100%;
-                text-align: center;
                 border-top: 5px solid #ef4444;
             }
             h1 {
@@ -99,16 +103,26 @@ try {
                 font-size: 0.875rem;
                 margin-top: 1.5rem;
                 font-family: monospace;
+                overflow-x: auto;
             }
         </style>
     </head>
     <body>
         <div class="error-card">
             <h1>Database Connection Failed</h1>
-            <p>We are unable to connect to the MySQL database. Please make sure that XAMPP/WAMP (MySQL/MariaDB) or Railway service is running and configured correctly.</p>
+            <p>We are unable to connect to the MySQL database.</p>
             <div class="instructions">
                 <strong>Error Details:</strong><br>
                 <?= htmlspecialchars($e->getMessage()) ?><br><br>
+                
+                <strong>Diagnostic Info (Available Variable Keys):</strong><br>
+                <p>If MYSQLPASSWORD is not listed below, Railway is not passing it to the app.</p>
+                <b>$_SERVER keys:</b><br>
+                <?= htmlspecialchars(implode(', ', $serverKeys)) ?><br><br>
+                
+                <b>$_ENV keys:</b><br>
+                <?= htmlspecialchars(implode(', ', $envKeys)) ?><br><br>
+                
                 <strong>Setup Steps:</strong><br>
                 1. Local: Open XAMPP Control Panel and start MySQL.<br>
                 2. Live: Ensure environment variables (MYSQLHOST, MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD, MYSQLPORT) are set on Railway.
