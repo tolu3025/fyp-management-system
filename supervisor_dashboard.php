@@ -62,7 +62,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('my_students_load') ?></span>
-            <span>👨‍🎓</span>
+            <i class="fa-solid fa-user-graduate"></i>
         </div>
         <div class="stat-value"><?= $count_students ?></div>
         <div class="stat-footer">Assigned by Department HOD</div>
@@ -71,7 +71,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <div class="stat-card" style="border-top: 4px solid <?= $count_pending > 0 ? 'var(--warning)' : 'var(--border)' ?>;">
         <div class="stat-header">
             <span><?= __('waiting_review') ?></span>
-            <span>📥</span>
+            <i class="fa-solid fa-inbox"></i>
         </div>
         <div class="stat-value"><?= $count_pending ?></div>
         <div class="stat-footer">Awaiting feedback or validation</div>
@@ -80,7 +80,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('approved') ?> Tasks</span>
-            <span>✅</span>
+            <i class="fa-solid fa-circle-check"></i>
         </div>
         <div class="stat-value"><?= $count_completed ?></div>
         <div class="stat-footer">Validated student goals</div>
@@ -92,7 +92,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <div class="card">
         <div class="card-header">
             <h3><?= __('active_supervision_load') ?></h3>
-            <a href="supervisor_students.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><?= __('my_students') ?></a>
+            <a href="supervisor_students.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><i class="fa-solid fa-users"></i> <?= __('my_students') ?></a>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
@@ -171,7 +171,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
                                     </td>
                                     <td><?= date('d M, H:i', strtotime($sub['Tarikh_Hantar'])) ?></td>
                                     <td>
-                                        <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><?= __('submit') ?></a>
+                                        <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-magnifying-glass"></i> <?= __('submit') ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

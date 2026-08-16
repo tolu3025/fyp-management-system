@@ -31,9 +31,10 @@ $notifications = $stmt->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FYP Management System — Oduduwa University Ipetumodu</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- CSS Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- FontAwesome or simple characters for icons -->
 </head>
 <body>
     <div class="dashboard-wrapper">
@@ -52,7 +53,7 @@ $notifications = $stmt->fetchAll();
                     <!-- Notification Tray -->
                     <div class="notif-dropdown-container">
                         <button class="notif-badge-btn" id="notifBtn" aria-label="Notifications">
-                            <span class="notif-icon">🔔</span>
+                            <span class="notif-icon"><i class="fa-solid fa-bell"></i></span>
                             <?php if ($unread_count > 0): ?>
                                 <span class="badge-count"><?= $unread_count ?></span>
                             <?php endif; ?>
@@ -72,7 +73,7 @@ $notifications = $stmt->fetchAll();
                                     <?php foreach ($notifications as $n): ?>
                                         <div class="notif-item <?= $n['Status_Baca'] == 0 ? 'unread' : '' ?>" data-id="<?= $n['ID_notifikasi'] ?>">
                                             <div class="notif-item-text"><?= sanitize($n['Mesej']) ?></div>
-                                            <div class="notif-item-time"><?= date('M d, H:i', strtotime($n['Tarikh_Cipta'])) ?></div>
+                                            <div class="notif-item-time"><i class="fa-regular fa-clock"></i> <?= date('M d, H:i', strtotime($n['Tarikh_Cipta'])) ?></div>
                                         </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -81,7 +82,8 @@ $notifications = $stmt->fetchAll();
                     </div>
 
                     <!-- Language Switcher Dropdown -->
-                    <div class="lang-switcher-container" style="display: flex; align-items: center;">
+                    <div class="lang-switcher-container" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-globe" style="color: var(--text-muted); font-size: 0.9rem;"></i>
                         <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
                             <?php foreach($_GET as $key => $val): ?>
                                 <?php if ($key !== 'lang'): ?>
@@ -89,16 +91,16 @@ $notifications = $stmt->fetchAll();
                                 <?php endif; ?>
                             <?php endforeach; ?>
                             <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background-color: white; cursor: pointer; width: auto;">
-                                <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
-                                <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>🇲🇾 MS</option>
+                                <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>EN</option>
+                                <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>MS</option>
                             </select>
                         </form>
                     </div>
 
                     <!-- User Account Meta -->
-                    <div style="font-size: 0.875rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>👤</span>
-                        <span><?= sanitize($user_name) ?> (<?= sanitize($user_role) ?>)</span>
+                    <div style="font-size: 0.875rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; color: var(--bg-dark);">
+                        <i class="fa-solid fa-circle-user" style="font-size: 1.1rem; color: var(--primary-light);"></i>
+                        <span><?= sanitize($user_name) ?></span>
                     </div>
                 </div>
             </header>

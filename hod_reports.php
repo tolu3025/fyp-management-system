@@ -43,7 +43,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('monitoring_reports') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('monitoring_reports_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="hod_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <!-- Progress Summary Grid -->
@@ -51,7 +51,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
     <div class="stat-card">
         <div class="stat-header">
             <span>Overall Final Report Submissions</span>
-            <span>📄</span>
+            <i class="fa-solid fa-file-contract"></i>
         </div>
         <div class="stat-value"><?= $total_finalized ?> / <?= $total_students ?></div>
         <div class="stat-footer">
@@ -65,7 +65,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('overall_completion') ?></span>
-            <span>✅</span>
+            <i class="fa-solid fa-circle-check"></i>
         </div>
         <div class="stat-value"><?= $task_compliance_rate ?>%</div>
         <div class="stat-footer">
@@ -82,7 +82,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
     <div class="card-header">
         <h3>Student Progress Auditor Ledger</h3>
         <!-- Simple Print Shortcut Button -->
-        <button class="btn btn-secondary" onclick="window.print()" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">🖨️ <?= __('generate_report') ?></button>
+        <button class="btn btn-secondary" onclick="window.print()" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><i class="fa-solid fa-print"></i> <?= __('generate_report') ?></button>
     </div>
     <div class="card-body" style="padding: 0;">
         <div class="table-responsive">

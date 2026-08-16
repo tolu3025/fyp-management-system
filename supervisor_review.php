@@ -153,9 +153,9 @@ $comments = $comment_history_stmt->fetchAll();
     </div>
     
     <?php if ($user_role === 'HOD'): ?>
-        <a href="hod_reports.php" class="btn btn-secondary">⬅ <?= __('back') ?></a>
+        <a href="hod_reports.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back') ?></a>
     <?php else: ?>
-        <a href="supervisor_students.php?student_id=<?= urlencode($sub['No_matrik']) ?>" class="btn btn-secondary">⬅ <?= __('back') ?></a>
+        <a href="supervisor_students.php?student_id=<?= urlencode($sub['No_matrik']) ?>" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back') ?></a>
     <?php endif; ?>
 </div>
 
@@ -200,14 +200,14 @@ $comments = $comment_history_stmt->fetchAll();
                 <?php if ($sub['File_Path']): ?>
                     <div style="display: flex; align-items: center; justify-content: space-between; background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 1rem;">
                         <div style="display: flex; align-items: center; gap: 0.75rem;">
-                            <span style="font-size: 1.5rem;">📄</span>
+                            <i class="fa-solid fa-file-lines" style="font-size: 1.5rem; color: #166534;"></i>
                             <div>
                                 <span style="font-size: 0.85rem; font-weight: 600; color: #166534;"><?= sanitize($sub['File_Path']) ?></span>
                                 <span style="display: block; font-size: 0.7rem; color: #15803d;"><?= __('file_attachment') ?></span>
                             </div>
                         </div>
                         <!-- Download Link -->
-                        <a href="uploads/<?= urlencode($sub['File_Path']) ?>" class="btn btn-secondary" style="background-color: white; border: 1px solid #bbf7d0; color: #166534; font-size: 0.75rem; padding: 0.4rem 0.8rem;" download>⬇ Download File</a>
+                        <a href="uploads/<?= urlencode($sub['File_Path']) ?>" class="btn btn-secondary" style="background-color: white; border: 1px solid #bbf7d0; color: #166534; font-size: 0.75rem; padding: 0.4rem 0.8rem;" download><i class="fa-solid fa-file-arrow-down"></i> Download File</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -226,8 +226,8 @@ $comments = $comment_history_stmt->fetchAll();
                         <?php foreach ($comments as $com): ?>
                             <div class="comment-card" style="border-left: 4px solid <?= $com['Peranan_Pengulas'] === 'HOD' ? 'var(--secondary)' : 'var(--primary)' ?>;">
                                 <div class="comment-card-header">
-                                    <span class="comment-author"><?= sanitize($com['ReviewerName']) ?> (<?= sanitize($com['Peranan_Pengulas']) ?>)</span>
-                                    <span><?= date('d M Y, h:i A', strtotime($com['Tarikh_Ulasan'])) ?></span>
+                                    <span class="comment-author"><i class="fa-solid fa-comment-dots"></i> <?= sanitize($com['ReviewerName']) ?> (<?= sanitize($com['Peranan_Pengulas']) ?>)</span>
+                                    <span><i class="fa-regular fa-clock"></i> <?= date('d M Y, h:i A', strtotime($com['Tarikh_Ulasan'])) ?></span>
                                 </div>
                                 <div class="comment-text"><?= sanitize($com['Ulasan']) ?></div>
                             </div>
@@ -284,7 +284,7 @@ $comments = $comment_history_stmt->fetchAll();
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;"><?= __('post_feedback') ?></button>
+                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;"><i class="fa-solid fa-check"></i> <?= __('post_feedback') ?></button>
                 </form>
             </div>
         </div>

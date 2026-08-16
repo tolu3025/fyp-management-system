@@ -94,44 +94,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= __('register_page_title') ?> — Oduduwa University</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Public Header -->
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
-            <span style="font-size: 1.5rem;">🎓</span>
+            <i class="fa-solid fa-graduation-cap"></i>
             <span>FYP Portal</span>
         </a>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-            <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
-                <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
-                    <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
-                    <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>🇲🇾 MS</option>
-                </select>
-            </form>
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <!-- Language Selector Dropdown -->
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-globe" style="color: var(--text-muted); font-size: 0.9rem;"></i>
+                <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
+                    <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
+                        <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>EN</option>
+                        <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>MS</option>
+                    </select>
+                </form>
+            </div>
             <a href="login.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><?= __('login_button') ?></a>
         </div>
     </header>
 
-    <div class="register-body">
-        <div class="register-card">
-            <div class="register-header">
-                <h2><?= __('register_page_title') ?></h2>
-                <p><?= __('login_subtitle') ?></p>
+    <div class="register-body" style="padding: 3rem 1rem;">
+        <div class="register-card" style="max-width: 550px; margin: 0 auto; background: white; padding: 3rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border);">
+            <div class="register-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 1.75rem; color: var(--bg-dark); font-weight: 800;"><?= __('register_page_title') ?></h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;"><?= __('login_subtitle') ?></p>
             </div>
 
             <?php if (!empty($error)): ?>
-                <div class="alert alert-danger"><?= sanitize($error) ?></div>
+                <div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($error) ?></div>
             <?php endif; ?>
 
             <!-- Role Switch Tabs -->
             <div class="role-selector">
                 <div class="role-option active" id="tabStudent" onclick="switchRole('Student')">
-                    <?= __('student') ?>
+                    <i class="fa-solid fa-user-graduate"></i> <?= __('student') ?>
                 </div>
                 <div class="role-option" id="tabSupervisor" onclick="switchRole('Supervisor')">
-                    <?= __('supervisor_role') ?>
+                    <i class="fa-solid fa-chalkboard-user"></i> <?= __('supervisor_role') ?>
                 </div>
             </div>
 
@@ -178,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" name="Katalaluan" id="Katalaluan" class="form-input" placeholder="••••••••" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;"><?= __('register_button') ?></button>
+                <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;"><i class="fa-solid fa-user-plus"></i> <?= __('register_button') ?></button>
             </form>
 
             <div style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem;">

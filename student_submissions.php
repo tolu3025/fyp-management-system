@@ -23,7 +23,7 @@ if (!$project || !$project['No_staf']) {
     echo '
     <div class="card" style="max-width: 600px; margin: 2rem auto;">
         <div class="card-header" style="background-color: #fee2e2; border-bottom-color: #fca5a5;">
-            <h3 style="color: #991b1b;">Supervision Allocation Required</h3>
+            <h3 style="color: #991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> Supervision Allocation Required</h3>
         </div>
         <div class="card-body" style="text-align: center;">
             <p style="margin-bottom: 1.5rem; color: #7f1d1d;">You cannot make submissions until the HOD has assigned a supervisor to your profile.</p>
@@ -218,7 +218,7 @@ $submissions_history = $history_stmt->fetchAll();
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('tasks_submissions') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('submit_deliverables_desc') ?></p>
     </div>
-    <a href="student_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="student_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2" style="margin-bottom: 2rem;">
@@ -243,7 +243,7 @@ $submissions_history = $history_stmt->fetchAll();
                         <textarea name="Kandungan" id="weekly_content" class="form-input" rows="4" placeholder="Explain tasks performed, findings, or challenges this week..." required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary"><?= __('submit') ?></button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> <?= __('submit') ?></button>
                 </form>
             </div>
         </div>
@@ -263,7 +263,7 @@ $submissions_history = $history_stmt->fetchAll();
                         <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Only PDF files are accepted. This will trigger a critical department review alert.</span>
                     </div>
 
-                    <button type="submit" class="btn btn-danger"><?= __('submit_final_report') ?></button>
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i> <?= __('submit_final_report') ?></button>
                 </form>
             </div>
         </div>
@@ -295,7 +295,7 @@ $submissions_history = $history_stmt->fetchAll();
                         <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Accepted: PDF, ZIP, DOCX, Word, Images. Max 10MB.</span>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary btn-block"><?= __('submit') ?></button>
+                    <button type="submit" class="btn btn-secondary btn-block"><i class="fa-solid fa-cloud-arrow-up"></i> <?= __('submit') ?></button>
                 </form>
             </div>
         </div>
@@ -336,7 +336,7 @@ $submissions_history = $history_stmt->fetchAll();
                                 <td>
                                     <?php if ($sub['File_Path']): ?>
                                         <a href="uploads/<?= urlencode($sub['File_Path']) ?>" style="color: var(--secondary); font-weight: 600; text-decoration: none;" download>
-                                            📄 <?= __('download_file') ?> (<?= sanitize(pathinfo($sub['File_Path'], PATHINFO_EXTENSION)) ?>)
+                                            <i class="fa-solid fa-file-arrow-down"></i> <?= __('download_file') ?> (<?= sanitize(pathinfo($sub['File_Path'], PATHINFO_EXTENSION)) ?>)
                                         </a>
                                     <?php else: ?>
                                         <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;">None</span>

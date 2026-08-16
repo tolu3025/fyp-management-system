@@ -14,8 +14,8 @@ if (file_exists($log_file)) {
             <!-- Developers Simulated Email Log Console Drawer -->
             <footer class="dev-mail-console">
                 <div class="dev-mail-header" id="devMailHeader">
-                    <span>🛠️ Developer Email Logs Console (Local Environment Simulator)</span>
-                    <span class="toggle-indicator">▲</span>
+                    <span><i class="fa-solid fa-terminal"></i> Developer Email Logs Console (Local Environment Simulator)</span>
+                    <span class="toggle-indicator"><i class="fa-solid fa-chevron-up"></i></span>
                 </div>
                 <div class="dev-mail-content" id="devMailContent">
                     <?php if (empty($email_logs)): ?>

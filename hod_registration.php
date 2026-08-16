@@ -158,7 +158,7 @@ $supervision_list = $pdo->query("
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('user_mgmt') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('user_mgmt_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="hod_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2" style="margin-bottom: 2rem;">
@@ -197,7 +197,7 @@ $supervision_list = $pdo->query("
                     <input type="email" name="Email" id="Email_std" class="form-input" placeholder="student@student.oduduwa.edu.ng" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block"><?= __('register_button') ?></button>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> <?= __('register_button') ?></button>
             </form>
         </div>
     </div>
@@ -237,7 +237,7 @@ $supervision_list = $pdo->query("
                     <input type="email" name="Email" id="Email_sup" class="form-input" placeholder="lecturer@oduduwa.edu.ng" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block"><?= __('register_button') ?></button>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> <?= __('register_button') ?></button>
             </form>
         </div>
     </div>
@@ -273,7 +273,7 @@ $supervision_list = $pdo->query("
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-secondary btn-block"><?= __('link_assignment') ?></button>
+                <button type="submit" class="btn btn-secondary btn-block"><i class="fa-solid fa-link"></i> <?= __('link_assignment') ?></button>
             </form>
         </div>
     </div>

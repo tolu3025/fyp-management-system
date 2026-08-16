@@ -107,7 +107,7 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('activity_mgmt') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('activity_mgmt_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="hod_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2">
@@ -156,7 +156,7 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <button type="submit" class="btn btn-primary"><?= $edit_mode ? 'Update Activity' : __('submit') ?></button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> <?= $edit_mode ? 'Update Activity' : __('submit') ?></button>
                     <?php if ($edit_mode): ?>
                         <a href="hod_activities.php" class="btn btn-secondary"><?= __('cancel') ?></a>
                     <?php endif; ?>
@@ -200,8 +200,8 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
                                     </td>
                                     <td>
                                         <div style="display: flex; gap: 0.5rem;">
-                                            <a href="hod_activities.php?edit=<?= urlencode($act['Kod_aktiviti']) ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" title="Edit">✏️</a>
-                                            <a href="hod_activities.php?delete=<?= urlencode($act['Kod_aktiviti']) ?>" class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="return confirm('Are you sure you want to delete this activity?')" title="Delete">🗑️</a>
+                                            <a href="hod_activities.php?edit=<?= urlencode($act['Kod_aktiviti']) ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a href="hod_activities.php?delete=<?= urlencode($act['Kod_aktiviti']) ?>" class="btn btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="return confirm('Are you sure you want to delete this activity?')" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
                                         </div>
                                     </td>
                                 </tr>

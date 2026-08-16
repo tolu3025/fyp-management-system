@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('add_task') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;">Create a custom project deliverable and set strict deadlines</p>
     </div>
-    <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary"><?= __('cancel') ?></a>
+    <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('cancel') ?></a>
 </div>
 
 <div class="card" style="max-width: 600px; margin: 0 auto 2rem auto;">
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button type="submit" class="btn btn-primary"><?= __('add_task') ?></button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> <?= __('add_task') ?></button>
                 <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary"><?= __('cancel') ?></a>
             </div>
         </form>

@@ -52,13 +52,13 @@ $submissions = $subs_stmt->fetchAll();
     <div class="card-header" style="background: transparent;">
         <h3><?= __('my_fyp') ?></h3>
         <?php if ($project && empty($project['Tajuk_Projek'])): ?>
-            <a href="student_project.php" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;"><?= __('reg_proj_title') ?></a>
+            <a href="student_project.php" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;"><i class="fa-solid fa-pen-to-square"></i> <?= __('reg_proj_title') ?></a>
         <?php endif; ?>
     </div>
     <div class="card-body">
         <?php if (!$project): ?>
             <div style="text-align: center; color: var(--text-muted); padding: 1.5rem 0;">
-                <p>⚠️ <?= __('not_assigned') ?></p>
+                <p><i class="fa-solid fa-triangle-exclamation"></i> <?= __('not_assigned') ?></p>
             </div>
         <?php else: ?>
             <div class="detail-list" style="margin-bottom: 1.5rem;">
@@ -99,7 +99,7 @@ $submissions = $subs_stmt->fetchAll();
     <div class="card">
         <div class="card-header">
             <h3><?= __('supervisor_checklist') ?></h3>
-            <a href="student_submissions.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><?= __('upload_submissions') ?></a>
+            <a href="student_submissions.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><i class="fa-solid fa-cloud-arrow-up"></i> <?= __('upload_submissions') ?></a>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">

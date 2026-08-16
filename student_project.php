@@ -23,7 +23,7 @@ if (!$project || !$project['No_staf']) {
     echo '
     <div class="card" style="max-width: 600px; margin: 2rem auto;">
         <div class="card-header" style="background-color: #fee2e2; border-bottom-color: #fca5a5;">
-            <h3 style="color: #991b1b;">Supervision Allocation Required</h3>
+            <h3 style="color: #991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> Supervision Allocation Required</h3>
         </div>
         <div class="card-body" style="text-align: center;">
             <p style="margin-bottom: 1.5rem; color: #7f1d1d;">The Head of Department (HOD) must assign a Supervisor to your profile before you can register your project title.</p>
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('reg_proj_title') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('project_title_desc') ?></p>
     </div>
-    <a href="student_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="student_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="card" style="max-width: 600px; margin: 0 auto 2rem auto;">
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button type="submit" class="btn btn-primary"><?= __('reg_proj_title') ?></button>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> <?= __('reg_proj_title') ?></button>
                 <a href="student_dashboard.php" class="btn btn-secondary"><?= __('back') ?></a>
             </div>
         </form>

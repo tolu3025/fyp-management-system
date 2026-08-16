@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             devMailContent.classList.toggle('open');
             const indicator = devMailHeader.querySelector('.toggle-indicator');
             if (indicator) {
-                indicator.textContent = devMailContent.classList.contains('open') ? '▼' : '▲';
+                indicator.innerHTML = devMailContent.classList.contains('open') ? '<i class="fa-solid fa-chevron-down"></i>' : '<i class="fa-solid fa-chevron-up"></i>';
             }
         });
     }

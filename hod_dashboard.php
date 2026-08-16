@@ -39,7 +39,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('total_supervisors') ?></span>
-            <span>👥</span>
+            <i class="fa-solid fa-users"></i>
         </div>
         <div class="stat-value"><?= $total_supervisors ?></div>
         <div class="stat-footer">Registered lecturers</div>
@@ -48,7 +48,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('total_students') ?></span>
-            <span>🎓</span>
+            <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <div class="stat-value"><?= $total_students ?></div>
         <div class="stat-footer">Final year students</div>
@@ -57,7 +57,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <div class="stat-card">
         <div class="stat-header">
             <span><?= __('assigned_projects') ?></span>
-            <span>📁</span>
+            <i class="fa-solid fa-folder-open"></i>
         </div>
         <div class="stat-value"><?= $total_projects ?></div>
         <div class="stat-footer">Titles registered by students</div>
@@ -66,7 +66,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <div class="stat-card" style="border-top: 4px solid <?= $unassigned_students > 0 ? 'var(--danger)' : 'var(--success)' ?>;">
         <div class="stat-header">
             <span>Unassigned Students</span>
-            <span>⚠️</span>
+            <i class="fa-solid fa-triangle-exclamation" style="color: <?= $unassigned_students > 0 ? 'var(--danger)' : 'var(--success)' ?>;"></i>
         </div>
         <div class="stat-value"><?= $unassigned_students ?></div>
         <div class="stat-footer">Awaiting supervisor allocation</div>
@@ -78,7 +78,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <div class="card">
         <div class="card-header">
             <h3><?= __('activity_mgmt') ?></h3>
-            <a href="hod_activities.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><?= __('manage_activities') ?></a>
+            <a href="hod_activities.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><i class="fa-solid fa-sliders"></i> <?= __('manage_activities') ?></a>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">

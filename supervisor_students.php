@@ -60,7 +60,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Supervision & Progress Auditor</h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;">View assigned student progress and assign milestone deliverables</p>
     </div>
-    <a href="supervisor_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
+    <a href="supervisor_dashboard.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="dashboard-wrapper" style="min-height: auto; gap: 2rem; background: transparent; padding: 0;">
@@ -109,7 +109,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                         <p style="font-size: 0.8rem; color: var(--text-muted);"><?= sanitize($selected_student['No_matrik']) ?> — Semester <?= $selected_student['Semester'] ?> Student</p>
                     </div>
                     <div>
-                        <a href="supervisor_tasks.php?student_id=<?= urlencode($selected_student['No_matrik']) ?>" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">➕ <?= __('add_task') ?></a>
+                        <a href="supervisor_tasks.php?student_id=<?= urlencode($selected_student['No_matrik']) ?>" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;"><i class="fa-solid fa-plus"></i> <?= __('add_task') ?></a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -238,7 +238,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                                                 </td>
                                                 <td><?= date('d M, H:i', strtotime($sub['Tarikh_Hantar'])) ?></td>
                                                 <td>
-                                                    <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><?= __('submit') ?></a>
+                                                    <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-magnifying-glass"></i> <?= __('submit') ?></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

@@ -75,22 +75,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= __('system_title') ?></title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Public Header -->
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
-            <span style="font-size: 1.5rem;">🎓</span>
+            <i class="fa-solid fa-graduation-cap"></i>
             <span>FYP Portal</span>
         </a>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-            <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
-                <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
-                    <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
-                    <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>🇲🇾 MS</option>
-                </select>
-            </form>
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <!-- Language Selector Dropdown -->
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-globe" style="color: var(--text-muted); font-size: 0.9rem;"></i>
+                <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
+                    <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
+                        <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>EN</option>
+                        <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>MS</option>
+                    </select>
+                </form>
+            </div>
             <a href="register.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><?= __('register_button') ?></a>
         </div>
     </header>
@@ -103,11 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <?php if (!empty($error)): ?>
-                <div class="alert alert-danger"><?= sanitize($error) ?></div>
+                <div class="alert alert-danger"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($error) ?></div>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['success_msg'])): ?>
-                <div class="alert alert-success"><?= sanitize($_SESSION['success_msg']); unset($_SESSION['success_msg']); ?></div>
+                <div class="alert alert-success"><i class="fa-solid fa-circle-check"></i> <?= sanitize($_SESSION['success_msg']); unset($_SESSION['success_msg']); ?></div>
             <?php endif; ?>
 
             <form action="login.php" method="POST" autocomplete="off">
@@ -121,14 +127,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="password" name="password" id="password" class="form-input" placeholder="••••••••" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block"><?= __('login_button') ?></button>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></button>
             </form>
             
             <div style="margin-top: 1.5rem; text-align: center; font-size: 0.8rem;">
                 <a href="register.php" style="color: var(--primary); text-decoration: none; font-weight: 600;"><?= __('dont_have_account') ?></a>
             </div>
 
-            <div style="margin-top: 2rem; text-align: center; font-size: 0.72rem; color: var(--text-muted); line-height: 1.4;">
+            <div style="margin-top: 2rem; text-align: center; font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; font-weight: 500;">
                 <?= __('dept_title') ?> <br>
                 <?= __('college_title') ?>
             </div>
