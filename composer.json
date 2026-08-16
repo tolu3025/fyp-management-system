@@ -1,0 +1,10 @@
+{
+    "name": "tolu3025/fyp-management-system",
+    "description": "FYP Management System — Oduduwa University Ipetumodu",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
+    }
+}
