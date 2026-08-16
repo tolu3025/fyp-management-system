@@ -1,0 +1,13 @@
+# Git ignore rules for FYP Management System
+
+# Ignore uploaded student deliverables
+uploads/*
+!.gitkeep
+
+# Ignore runtime email logs
+logs/*.log
+!.gitkeep
+
+# OS specific files
+.DS_Store
+Thumbs.db
