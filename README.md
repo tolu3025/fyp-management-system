@@ -70,3 +70,16 @@ Since local development environments (XAMPP/WAMP) do not usually have active SMT
 - Outgoing emails triggered by student submissions or supervisor comments are logged to a file: [logs/emails.log](file:///C:/Users/Lenovo%20ThinkBook/.gemini/antigravity-ide/scratch/fyp_management_system/logs/emails.log).
 - You can inspect these emails in real-time by expanding the **🛠️ Developer Email Logs Console** located at the bottom (footer drawer) of any page after logging in.
 - This allows full system and unit verification of notification scenarios without SMTP setup!
+
+---
+
+## ☁️ Deploying to Railway (Automatic Database Setup)
+
+You can deploy this repository directly to **Railway** without having to perform manual database setup:
+
+1. Create a new project on Railway.
+2. Link your GitHub repository: `tolu3025/fyp-management-system`.
+3. Add a **MySQL** database service to your Railway project.
+4. Railway will automatically link the MySQL service environment variables (such as `MYSQLHOST`, `MYSQLDATABASE`, `MYSQLUSER`, `MYSQLPASSWORD`, and `MYSQLPORT`) to your PHP web service.
+5. On the first page load, the system's **Auto-Builder** will detect the empty database and automatically run the schema creation and seed scripts from `db/fyp_db.sql`.
+
