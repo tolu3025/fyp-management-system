@@ -2,12 +2,20 @@
 // config/db.php
 // Database configuration and auto-initialization for Local and Railway deployment
 
+// Helper function to safely retrieve environment variables across different PHP runtimes
+function get_env_var($key, $default = '') {
+    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return $_SERVER[$key];
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return $_ENV[$key];
+    $val = getenv($key);
+    return ($val !== false && $val !== '') ? $val : $default;
+}
+
 // 1. Load connection variables (prioritizing Railway environment variables)
-$host = getenv('MYSQLHOST') ?: '127.0.0.1';
-$db   = getenv('MYSQLDATABASE') ?: 'fyp_management_system';
-$user = getenv('MYSQLUSER') ?: 'root';
-$pass = getenv('MYSQLPASSWORD') !== false ? getenv('MYSQLPASSWORD') : '';
-$port = getenv('MYSQLPORT') ?: '3306';
+$host = get_env_var('MYSQLHOST', '127.0.0.1');
+$db   = get_env_var('MYSQLDATABASE', 'fyp_management_system');
+$user = get_env_var('MYSQLUSER', 'root');
+$pass = get_env_var('MYSQLPASSWORD', '');
+$port = get_env_var('MYSQLPORT', '3306');
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
