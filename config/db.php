@@ -10,12 +10,26 @@ function get_env_var($key, $default = '') {
     return ($val !== false && $val !== '') ? $val : $default;
 }
 
-// 1. Load connection variables (prioritizing Railway environment variables)
-$host = get_env_var('MYSQLHOST', '127.0.0.1');
-$db   = get_env_var('MYSQLDATABASE', 'fyp_management_system');
-$user = get_env_var('MYSQLUSER', 'root');
-$pass = get_env_var('MYSQLPASSWORD', '');
-$port = get_env_var('MYSQLPORT', '3306');
+// 1. Load connection variables (prioritizing Railway's MYSQL_URL if available)
+$mysql_url = get_env_var('MYSQL_URL', '');
+
+if ($mysql_url) {
+    // Parse the connection URL provided by Railway
+    $parsed_url = parse_url($mysql_url);
+    $host = $parsed_url['host'] ?? '127.0.0.1';
+    $port = $parsed_url['port'] ?? '3306';
+    $user = $parsed_url['user'] ?? 'root';
+    $pass = $parsed_url['pass'] ?? '';
+    $db   = ltrim($parsed_url['path'] ?? '/fyp_management_system', '/');
+} else {
+    // Fallback to individual variables, checking both standard and Railway-specific names
+    $host = get_env_var('MYSQLHOST', '127.0.0.1');
+    $db   = get_env_var('MYSQLDATABASE', get_env_var('MYSQL_DATABASE', 'fyp_management_system'));
+    $user = get_env_var('MYSQLUSER', 'root');
+    $pass = get_env_var('MYSQLPASSWORD', get_env_var('MYSQL_ROOT_PASSWORD', ''));
+    $port = get_env_var('MYSQLPORT', '3306');
+}
+
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
