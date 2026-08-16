@@ -86,10 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Assign Specific Task</h1>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('add_task') ?></h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;">Create a custom project deliverable and set strict deadlines</p>
     </div>
-    <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary">Cancel</a>
+    <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary"><?= __('cancel') ?></a>
 </div>
 
 <div class="card" style="max-width: 600px; margin: 0 auto 2rem auto;">
@@ -99,13 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="card-body">
         <form action="supervisor_tasks.php" method="POST" autocomplete="off">
             <div class="form-group">
-                <label for="No_matrik" class="form-label">Supervised Student</label>
+                <label for="No_matrik" class="form-label"><?= __('student') ?></label>
                 <?php if ($target_student): ?>
                     <input type="text" class="form-input" style="background-color: #f1f5f9;" readonly value="<?= sanitize($target_student['StudentName']) ?> (<?= sanitize($target_student['No_matrik']) ?>)">
                     <input type="hidden" name="No_matrik" value="<?= sanitize($target_student['No_matrik']) ?>">
                 <?php else: ?>
                     <select name="No_matrik" id="No_matrik" class="form-input" required>
-                        <option value="">-- Choose Student --</option>
+                        <option value=""><?= __('choose_student') ?></option>
                         <?php foreach ($assigned_students as $stu): ?>
                             <option value="<?= sanitize($stu['No_matrik']) ?>"><?= sanitize($stu['StudentName']) ?> (<?= sanitize($stu['No_matrik']) ?>)</option>
                         <?php endforeach; ?>
@@ -114,18 +114,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="Jenis" class="form-label">Task Description / Type (Jenis)</label>
+                <label for="Jenis" class="form-label"><?= __('task_goal') ?></label>
                 <input type="text" name="Jenis" id="Jenis" class="form-input" placeholder="e.g. Chapter 3 Methodology Write-up" required>
             </div>
 
             <div class="form-group">
-                <label for="Deadline" class="form-label">Submission Deadline</label>
+                <label for="Deadline" class="form-label"><?= __('deadline') ?></label>
                 <input type="date" name="Deadline" id="Deadline" class="form-input" required min="<?= date('Y-m-d') ?>">
             </div>
 
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button type="submit" class="btn btn-primary">Assign Task</button>
-                <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary"><?= __('add_task') ?></button>
+                <a href="supervisor_students.php?student_id=<?= urlencode($target_student_id) ?>" class="btn btn-secondary"><?= __('cancel') ?></a>
             </div>
         </form>
     </div>

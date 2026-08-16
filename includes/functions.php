@@ -6,6 +6,36 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Global Language Switched Listener
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'] === 'ms' ? 'ms' : 'en';
+    $_SESSION['lang'] = $lang;
+    
+    // Redirect to same URL without lang parameter to keep clean URLs
+    $uri = strtok($_SERVER["REQUEST_URI"], '?');
+    $query = $_GET;
+    unset($query['lang']);
+    if (!empty($query)) {
+        $uri .= '?' . http_build_query($query);
+    }
+    header("Location: $uri");
+    exit();
+}
+
+/**
+ * Localization helper function
+ */
+function __($key) {
+    global $lang_dict;
+    static $dict_loaded = false;
+    if (!$dict_loaded) {
+        require_once __DIR__ . '/lang.php';
+        $dict_loaded = true;
+    }
+    $lang = $_SESSION['lang'] ?? 'en';
+    return $lang_dict[$lang][$key] ?? $lang_dict['en'][$key] ?? $key;
+}
+
 /**
  * Sanitizes input data to prevent XSS
  */

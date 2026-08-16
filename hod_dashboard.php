@@ -30,15 +30,15 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
 ?>
 
 <div style="margin-bottom: 2rem;">
-    <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Welcome back, HOD</h1>
-    <p style="color: var(--text-muted); font-size: 0.875rem;">FYP Management System — Oduduwa University Ipetumodu</p>
+    <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('hod_workspace') ?></h1>
+    <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('system_title') ?></p>
 </div>
 
 <!-- Stats Grid -->
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
-            <span>Total Supervisors</span>
+            <span><?= __('total_supervisors') ?></span>
             <span>👥</span>
         </div>
         <div class="stat-value"><?= $total_supervisors ?></div>
@@ -47,7 +47,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     
     <div class="stat-card">
         <div class="stat-header">
-            <span>Total Students</span>
+            <span><?= __('total_students') ?></span>
             <span>🎓</span>
         </div>
         <div class="stat-value"><?= $total_students ?></div>
@@ -56,7 +56,7 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
 
     <div class="stat-card">
         <div class="stat-header">
-            <span>Registered Projects</span>
+            <span><?= __('assigned_projects') ?></span>
             <span>📁</span>
         </div>
         <div class="stat-value"><?= $total_projects ?></div>
@@ -77,24 +77,24 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
     <!-- Upcoming Activities Card -->
     <div class="card">
         <div class="card-header">
-            <h3>Departmental FYP Activities</h3>
-            <a href="hod_activities.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Manage</a>
+            <h3><?= __('activity_mgmt') ?></h3>
+            <a href="hod_activities.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><?= __('manage_activities') ?></a>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Activity</th>
-                            <th>Date / Time</th>
-                            <th>Location</th>
+                            <th><?= __('activity_code') ?></th>
+                            <th><?= __('activity_type') ?></th>
+                            <th><?= __('date') ?> / <?= __('time') ?></th>
+                            <th><?= __('location') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($activities)): ?>
                             <tr>
-                                <td colspan="4" style="text-align: center; color: var(--text-muted);">No departmental activities scheduled.</td>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No departmental activities scheduled.</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($activities as $act): ?>
@@ -125,16 +125,16 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Task</th>
-                            <th>Deadline</th>
-                            <th>Status</th>
+                            <th><?= __('student') ?></th>
+                            <th><?= __('task_goal') ?></th>
+                            <th><?= __('deadline') ?></th>
+                            <th><?= __('status') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($recent_tasks)): ?>
                             <tr>
-                                <td colspan="4" style="text-align: center; color: var(--text-muted);">No tasks assigned yet.</td>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No tasks assigned yet.</td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($recent_tasks as $task): ?>
@@ -147,11 +147,11 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
                                     <td><?= date('d M Y', strtotime($task['Deadline'])) ?></td>
                                     <td>
                                         <?php if ($task['Pengesahan'] === 'Disahkan'): ?>
-                                            <span class="badge badge-approved">Approved</span>
+                                            <span class="badge badge-approved"><?= __('approved') ?></span>
                                         <?php elseif ($task['Pengesahan'] === 'Hantar Semula'): ?>
-                                            <span class="badge badge-resubmit">Resubmit</span>
+                                            <span class="badge badge-resubmit"><?= __('resubmit') ?></span>
                                         <?php else: ?>
-                                            <span class="badge badge-pending">Pending</span>
+                                            <span class="badge badge-pending"><?= __('pending') ?></span>
                                         <?php endif; ?>
                                     </td>
                                 </tr>

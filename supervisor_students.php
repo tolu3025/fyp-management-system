@@ -60,7 +60,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
         <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Supervision & Progress Auditor</h1>
         <p style="color: var(--text-muted); font-size: 0.875rem;">View assigned student progress and assign milestone deliverables</p>
     </div>
-    <a href="supervisor_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
+    <a href="supervisor_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="dashboard-wrapper" style="min-height: auto; gap: 2rem; background: transparent; padding: 0;">
@@ -68,7 +68,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
     <div style="width: 320px; flex-shrink: 0;">
         <div class="card">
             <div class="card-header">
-                <h3>Supervised Students</h3>
+                <h3><?= __('my_students_load') ?></h3>
             </div>
             <div class="card-body" style="padding: 0.75rem;">
                 <ul style="list-style: none;">
@@ -109,19 +109,19 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                         <p style="font-size: 0.8rem; color: var(--text-muted);"><?= sanitize($selected_student['No_matrik']) ?> — Semester <?= $selected_student['Semester'] ?> Student</p>
                     </div>
                     <div>
-                        <a href="supervisor_tasks.php?student_id=<?= urlencode($selected_student['No_matrik']) ?>" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">➕ Assign Specific Task</a>
+                        <a href="supervisor_tasks.php?student_id=<?= urlencode($selected_student['No_matrik']) ?>" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;">➕ <?= __('add_task') ?></a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="detail-list">
                         <div class="detail-item">
-                            <span class="detail-label">Project Title:</span>
+                            <span class="detail-label"><?= __('project_title') ?>:</span>
                             <span class="detail-value" style="color: var(--primary); font-size: 0.95rem;">
-                                <?= $selected_student['Tajuk_Projek'] ? sanitize($selected_student['Tajuk_Projek']) : '<em style="color: var(--text-muted); font-weight: normal;">No title registered yet</em>' ?>
+                                <?= $selected_student['Tajuk_Projek'] ? sanitize($selected_student['Tajuk_Projek']) : '<em style="color: var(--text-muted); font-weight: normal;">' . __('not_registered') . '</em>' ?>
                             </span>
                         </div>
                         <div class="detail-item">
-                            <span class="detail-label">Email:</span>
+                            <span class="detail-label"><?= __('email') ?>:</span>
                             <span class="detail-value"><?= sanitize($selected_student['Email']) ?></span>
                         </div>
                     </div>
@@ -131,17 +131,17 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
             <!-- Departmental Milestones Activity list (Reference) -->
             <div class="card" style="margin-bottom: 1.5rem;">
                 <div class="card-header">
-                    <h3>Departmental Milestones (Reference)</h3>
+                    <h3><?= __('upcoming_activities') ?></h3>
                 </div>
                 <div class="card-body" style="padding: 0;">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Activity Code</th>
-                                    <th>Milestone / Activity</th>
-                                    <th>Deadline</th>
-                                    <th>Location</th>
+                                    <th><?= __('activity_code') ?></th>
+                                    <th><?= __('activity_type') ?></th>
+                                    <th><?= __('deadline') ?></th>
+                                    <th><?= __('location') ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -169,16 +169,16 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                 <!-- Tasks List -->
                 <div class="card">
                     <div class="card-header">
-                        <h3>Assigned Tasks Checklist</h3>
+                        <h3><?= __('supervisor_checklist') ?></h3>
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Task Type / Desc</th>
-                                        <th>Deadline</th>
-                                        <th>Endorsement</th>
+                                        <th><?= __('task_goal') ?></th>
+                                        <th><?= __('deadline') ?></th>
+                                        <th><?= __('status') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,11 +193,11 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                                                 <td><?= date('d M Y', strtotime($task['Deadline'])) ?></td>
                                                 <td>
                                                     <?php if ($task['Pengesahan'] === 'Disahkan'): ?>
-                                                        <span class="badge badge-approved">Approved</span>
+                                                        <span class="badge badge-approved"><?= __('approved') ?></span>
                                                     <?php elseif ($task['Pengesahan'] === 'Hantar Semula'): ?>
-                                                        <span class="badge badge-resubmit">Resubmit</span>
+                                                        <span class="badge badge-resubmit"><?= __('resubmit') ?></span>
                                                     <?php else: ?>
-                                                        <span class="badge badge-pending">Pending</span>
+                                                        <span class="badge badge-pending"><?= __('pending') ?></span>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -212,16 +212,16 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                 <!-- Submissions Review Panel -->
                 <div class="card">
                     <div class="card-header">
-                        <h3>Student Deliverables / Logs</h3>
+                        <h3><?= __('recent_submissions') ?></h3>
                     </div>
                     <div class="card-body" style="padding: 0;">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Type / Deliverable</th>
-                                        <th>Submitted</th>
-                                        <th>Actions</th>
+                                        <th><?= __('submission_type') ?></th>
+                                        <th><?= __('date_submitted') ?></th>
+                                        <th><?= __('actions') ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -238,7 +238,7 @@ $activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC")->fetchAl
                                                 </td>
                                                 <td><?= date('d M, H:i', strtotime($sub['Tarikh_Hantar'])) ?></td>
                                                 <td>
-                                                    <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">View</a>
+                                                    <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><?= __('submit') ?></a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

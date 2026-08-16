@@ -45,7 +45,7 @@ $notifications = $stmt->fetchAll();
             <!-- Top Nav Panel -->
             <header class="top-nav">
                 <div class="page-title">
-                    FYP Management System
+                    <?= __('login_title') ?>
                 </div>
                 
                 <div class="nav-actions">
@@ -78,6 +78,21 @@ $notifications = $stmt->fetchAll();
                                 <?php endif; ?>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Language Switcher Dropdown -->
+                    <div class="lang-switcher-container" style="display: flex; align-items: center;">
+                        <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
+                            <?php foreach($_GET as $key => $val): ?>
+                                <?php if ($key !== 'lang'): ?>
+                                    <input type="hidden" name="<?= sanitize($key) ?>" value="<?= sanitize($val) ?>">
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background-color: white; cursor: pointer; width: auto;">
+                                <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
+                                <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>🇲🇾 MS</option>
+                            </select>
+                        </form>
                     </div>
 
                     <!-- User Account Meta -->

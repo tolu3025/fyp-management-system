@@ -40,10 +40,10 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">FYP Monitoring & Supervision Reports</h1>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Departmental status audits and student progress tracking</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('monitoring_reports') ?></h1>
+        <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('monitoring_reports_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
+    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
 </div>
 
 <!-- Progress Summary Grid -->
@@ -64,7 +64,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
     
     <div class="stat-card">
         <div class="stat-header">
-            <span>Overall Task Completion Rate</span>
+            <span><?= __('overall_completion') ?></span>
             <span>✅</span>
         </div>
         <div class="stat-value"><?= $task_compliance_rate ?>%</div>
@@ -82,16 +82,16 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
     <div class="card-header">
         <h3>Student Progress Auditor Ledger</h3>
         <!-- Simple Print Shortcut Button -->
-        <button class="btn btn-secondary" onclick="window.print()" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">🖨️ Print Report</button>
+        <button class="btn btn-secondary" onclick="window.print()" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">🖨️ <?= __('generate_report') ?></button>
     </div>
     <div class="card-body" style="padding: 0;">
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Student Info</th>
-                        <th>Supervisor Assigned</th>
-                        <th>Project Topic / Title</th>
+                        <th><?= __('student') ?></th>
+                        <th><?= __('assigned_supervisor') ?></th>
+                        <th><?= __('project_title') ?></th>
                         <th style="text-align: center;">Weekly Logs</th>
                         <th style="text-align: center;">Task Progress</th>
                         <th>Completion Ratio</th>
@@ -116,14 +116,14 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
                                     <?php if ($r['SupervisorName']): ?>
                                         <span style="font-weight: 500;"><?= sanitize($r['SupervisorName']) ?></span>
                                     <?php else: ?>
-                                        <span style="color: var(--danger); font-style: italic; font-size: 0.8rem;">Unassigned</span>
+                                        <span style="color: var(--danger); font-style: italic; font-size: 0.8rem;"><?= __('not_assigned') ?></span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
                                     <?php if ($r['Tajuk_Projek']): ?>
                                         <span style="font-size: 0.85rem; font-weight: 500; line-height: 1.3; display: block; max-width: 250px;"><?= sanitize($r['Tajuk_Projek']) ?></span>
                                     <?php else: ?>
-                                        <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;">Pending registration</span>
+                                        <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;"><?= __('not_registered') ?></span>
                                     <?php endif; ?>
                                 </td>
                                 <td style="text-align: center;">
@@ -142,7 +142,7 @@ $viva_readiness_rate = $total_students > 0 ? round(($total_finalized / $total_st
                                     <?php if ($r['FinalReportCount'] > 0): ?>
                                         <span class="badge badge-approved">Submitted</span>
                                     <?php else: ?>
-                                        <span class="badge badge-pending">Pending</span>
+                                        <span class="badge badge-pending"><?= __('pending') ?></span>
                                     <?php endif; ?>
                                 </td>
                             </tr>

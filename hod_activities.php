@@ -104,24 +104,24 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Manage Departmental Activities</h1>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Add, edit, or remove departmental milestones for final year students</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('activity_mgmt') ?></h1>
+        <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('activity_mgmt_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
+    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2">
     <!-- Form Card -->
     <div class="card">
         <div class="card-header">
-            <h3><?= $edit_mode ? 'Edit Activity Details' : 'Schedule New Activity' ?></h3>
+            <h3><?= $edit_mode ? 'Edit Activity Details' : __('add_new_activity') ?></h3>
         </div>
         <div class="card-body">
             <form action="hod_activities.php" method="POST" autocomplete="off">
                 <input type="hidden" name="action" value="<?= $edit_mode ? 'update' : 'create' ?>">
                 
                 <div class="form-group">
-                    <label for="Kod_aktiviti" class="form-label">Activity Code (Kod Aktiviti)</label>
+                    <label for="Kod_aktiviti" class="form-label"><?= __('activity_code') ?></label>
                     <input type="text" name="Kod_aktiviti" id="Kod_aktiviti" class="form-input" 
                            placeholder="e.g. ACT004" required 
                            <?= $edit_mode ? 'readonly style="background-color: #f1f5f9;"' : '' ?> 
@@ -129,7 +129,7 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
                 </div>
 
                 <div class="form-group">
-                    <label for="Jenis" class="form-label">Activity Type / Title (Jenis)</label>
+                    <label for="Jenis" class="form-label"><?= __('activity_type') ?></label>
                     <input type="text" name="Jenis" id="Jenis" class="form-input" 
                            placeholder="e.g. Thesis Draft Submission" required 
                            value="<?= sanitize($activity['Jenis']) ?>">
@@ -137,28 +137,28 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
 
                 <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
                     <div class="form-group">
-                        <label for="Tarikh" class="form-label">Date (Tarikh)</label>
+                        <label for="Tarikh" class="form-label"><?= __('date') ?></label>
                         <input type="date" name="Tarikh" id="Tarikh" class="form-input" required 
                                value="<?= sanitize($activity['Tarikh']) ?>">
                     </div>
                     <div class="form-group">
-                        <label for="Masa" class="form-label">Time (Masa)</label>
+                        <label for="Masa" class="form-label"><?= __('time') ?></label>
                         <input type="time" name="Masa" id="Masa" class="form-input" required 
                                value="<?= sanitize($activity['Masa']) ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="Lokasi" class="form-label">Location (Lokasi)</label>
+                    <label for="Lokasi" class="form-label"><?= __('location') ?></label>
                     <input type="text" name="Lokasi" id="Lokasi" class="form-input" 
                            placeholder="e.g. Computer Science Seminar Room" required 
                            value="<?= sanitize($activity['Lokasi']) ?>">
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <button type="submit" class="btn btn-primary"><?= $edit_mode ? 'Update Activity' : 'Schedule Activity' ?></button>
+                    <button type="submit" class="btn btn-primary"><?= $edit_mode ? 'Update Activity' : __('submit') ?></button>
                     <?php if ($edit_mode): ?>
-                        <a href="hod_activities.php" class="btn btn-secondary">Cancel Edit</a>
+                        <a href="hod_activities.php" class="btn btn-secondary"><?= __('cancel') ?></a>
                     <?php endif; ?>
                 </div>
             </form>
@@ -168,17 +168,17 @@ $all_activities = $pdo->query("SELECT * FROM Activity ORDER BY Tarikh ASC, Masa 
     <!-- Listing Card -->
     <div class="card">
         <div class="card-header">
-            <h3>Scheduled Activities</h3>
+            <h3><?= __('active_milestones') ?></h3>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Details</th>
-                            <th>Schedule</th>
-                            <th>Actions</th>
+                            <th><?= __('activity_code') ?></th>
+                            <th><?= __('activity_type') ?></th>
+                            <th><?= __('date') ?> / <?= __('time') ?></th>
+                            <th><?= __('actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>

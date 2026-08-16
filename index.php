@@ -1,19 +1,10 @@
 <?php
 // index.php
-// Main Login Page & Access Control Gateway for all three user roles
+// Redesigned: Clean Landing Page for the Ramon Adedoyin College of Natural and Applied Sciences, Oduduwa University Ipetumodu
+// Redirects logged-in users to dashboards, displays live stats, role details, and global language selector.
 
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
-
-// Handle Logout
-if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    session_start();
-    $_SESSION['success_msg'] = "You have logged out successfully.";
-    header("Location: index.php");
-    exit();
-}
 
 // Redirect if already logged in
 if (isLoggedIn()) {
@@ -27,56 +18,17 @@ if (isLoggedIn()) {
     exit();
 }
 
-$error = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login_id = trim($_POST['login_id'] ?? '');
-    $password = trim($_POST['password'] ?? '');
+// Fetch live database statistics for the landing page
+$student_count = 0;
+$supervisor_count = 0;
+$project_count = 0;
 
-    if (empty($login_id) || empty($password)) {
-        $error = "Please enter both Username/ID and Password.";
-    } else {
-        // 1. Check Student Table
-        $stmt = $pdo->prepare("SELECT * FROM Student WHERE No_matrik = ?");
-        $stmt->execute([$login_id]);
-        $user = $stmt->fetch();
-        $role = 'Student';
-
-        // 2. Check Supervisor Table
-        if (!$user) {
-            $stmt = $pdo->prepare("SELECT * FROM Supervisor WHERE No_staf = ?");
-            $stmt->execute([$login_id]);
-            $user = $stmt->fetch();
-            $role = 'Supervisor';
-        }
-
-        // 3. Check HOD Table
-        if (!$user) {
-            $stmt = $pdo->prepare("SELECT * FROM HOD WHERE No_staf = ?");
-            $stmt->execute([$login_id]);
-            $user = $stmt->fetch();
-            $role = 'HOD';
-        }
-
-        // Verify and authenticate
-        if ($user && password_verify($password, $user['Katalaluan'])) {
-            $_SESSION['user_id'] = ($role === 'Student') ? $user['No_matrik'] : $user['No_staf'];
-            $_SESSION['user_name'] = $user['Nama'];
-            $_SESSION['user_role'] = $role;
-            $_SESSION['user_email'] = $user['Email'];
-
-            // Log entry point redirect
-            if ($role === 'HOD') {
-                header("Location: hod_dashboard.php");
-            } elseif ($role === 'Supervisor') {
-                header("Location: supervisor_dashboard.php");
-            } else {
-                header("Location: student_dashboard.php");
-            }
-            exit();
-        } else {
-            $error = "Invalid Login ID or Password.";
-        }
-    }
+try {
+    $student_count = $pdo->query("SELECT COUNT(*) FROM Student")->fetchColumn();
+    $supervisor_count = $pdo->query("SELECT COUNT(*) FROM Supervisor")->fetchColumn();
+    $project_count = $pdo->query("SELECT COUNT(*) FROM Project WHERE Tajuk_Projek IS NOT NULL")->fetchColumn();
+} catch (PDOException $e) {
+    // If database connection fails during initial load, fallback gracefully
 }
 ?>
 <!DOCTYPE html>
@@ -84,42 +36,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FYP Management System — Oduduwa University Ipetumodu</title>
+    <title><?= __('system_title') ?></title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="login-body">
-    <div class="login-card">
-        <div class="login-logo">
-            <h1>FYP Management System</h1>
-            <p>Oduduwa University Ipetumodu</p>
+<body>
+    <!-- Public Header -->
+    <header class="portal-header">
+        <a href="index.php" class="portal-logo" style="text-decoration: none;">
+            <span style="font-size: 1.5rem;">🎓</span>
+            <span>FYP Portal</span>
+        </a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <!-- Language Selector Dropdown -->
+            <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
+                <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
+                    <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
+                    <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>🇲🇾 MS</option>
+                </select>
+            </form>
+            <a href="login.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><?= __('login_button') ?></a>
         </div>
+    </header>
 
-        <?php if (!empty($error)): ?>
-            <div class="alert alert-danger"><?= sanitize($error) ?></div>
-        <?php endif; ?>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title"><?= __('landing_hero_title') ?></h1>
+        <p class="hero-desc"><?= __('landing_hero_desc') ?></p>
+        <div class="hero-actions">
+            <a href="login.php" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1rem;"><?= __('login_button') ?></a>
+            <a href="register.php" class="btn btn-secondary" style="padding: 0.8rem 2rem; font-size: 1rem;"><?= __('register_button') ?></a>
+        </div>
+    </section>
 
-        <?php if (isset($_SESSION['success_msg'])): ?>
-            <div class="alert alert-success"><?= sanitize($_SESSION['success_msg']); unset($_SESSION['success_msg']); ?></div>
-        <?php endif; ?>
-
-        <form action="index.php" method="POST" autocomplete="off">
-            <div class="form-group">
-                <label for="login_id" class="form-label">Username / Matric / Staff ID</label>
-                <input type="text" name="login_id" id="login_id" class="form-input" placeholder="e.g. CSC/2022/001 or HOD001" required value="<?= isset($_POST['login_id']) ? sanitize($_POST['login_id']) : '' ?>">
+    <!-- Live Statistics Counter -->
+    <section style="background-color: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3rem 1rem;">
+        <div class="stats-grid" style="max-width: 1000px; margin: 0 auto; grid-template-columns: repeat(3, 1fr);">
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><?= $student_count ?></div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem;"><?= __('total_students') ?></div>
             </div>
-
-            <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-input" placeholder="••••••••" required>
+            <div style="text-align: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border);">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);"><?= $supervisor_count ?></div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem;"><?= __('total_supervisors') ?></div>
             </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--success);"><?= $project_count ?></div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem;"><?= __('assigned_projects') ?></div>
+            </div>
+        </div>
+    </section>
 
-            <button type="submit" class="btn btn-primary btn-block">Log In</button>
-        </form>
+    <!-- Role Explanation Section -->
+    <section style="padding: 4rem 1rem; background-color: var(--bg-light);">
+        <h2 style="text-align: center; font-size: 2rem; font-weight: 800; color: var(--bg-dark); margin-bottom: 3rem;"><?= __('landing_roles_title') ?></h2>
         
-        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.75rem; color: var(--text-muted);">
-            Department of Computer Science <br>
-            Ramon Adedoyin College of Natural and Applied Sciences
+        <div class="portal-grid-3">
+            <!-- HOD Card -->
+            <div class="portal-card">
+                <div class="icon">💼</div>
+                <h3><?= __('landing_hod_title') ?></h3>
+                <p><?= __('landing_hod_desc') ?></p>
+                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><?= __('login_button') ?></a>
+            </div>
+
+            <!-- Supervisor Card -->
+            <div class="portal-card">
+                <div class="icon">👨‍🏫</div>
+                <h3><?= __('landing_supervisor_title') ?></h3>
+                <p><?= __('landing_supervisor_desc') ?></p>
+                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><?= __('login_button') ?></a>
+            </div>
+
+            <!-- Student Card -->
+            <div class="portal-card">
+                <div class="icon">👨‍🎓</div>
+                <h3><?= __('landing_student_title') ?></h3>
+                <p><?= __('landing_student_desc') ?></p>
+                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><?= __('login_button') ?></a>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer Area -->
+    <footer style="background-color: var(--bg-dark); color: white; padding: 4rem 2rem; text-align: center; border-top: 5px solid var(--primary);">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;"><?= __('ready_to_start') ?></h3>
+            <p style="color: #94a3b8; margin-bottom: 2rem;"><?= __('system_title') ?></p>
+            <div style="font-size: 0.85rem; color: #64748b; line-height: 1.6;">
+                <?= __('dept_title') ?><br>
+                <?= __('college_title') ?><br>
+                Oduduwa University Ipetumodu, Osun State, Nigeria
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

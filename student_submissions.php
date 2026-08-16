@@ -27,7 +27,7 @@ if (!$project || !$project['No_staf']) {
         </div>
         <div class="card-body" style="text-align: center;">
             <p style="margin-bottom: 1.5rem; color: #7f1d1d;">You cannot make submissions until the HOD has assigned a supervisor to your profile.</p>
-            <a href="student_dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="student_dashboard.php" class="btn btn-secondary">' . __('back_to_dashboard') . '</a>
         </div>
     </div>';
     require_once __DIR__ . '/includes/footer.php';
@@ -190,7 +190,6 @@ function triggerSubmissionNotifications($pdo, $student_name, $no_matrik, $delive
     createNotification($pdo, 'HOD001', $notif_text);
 
     // 2. Email alerts
-    // Email to Supervisor
     if ($supervisor_email) {
         sendSystemEmail(
             $supervisor_email,
@@ -200,7 +199,6 @@ function triggerSubmissionNotifications($pdo, $student_name, $no_matrik, $delive
         );
     }
 
-    // Email to HOD
     sendSystemEmail(
         'hod@oduduwa.edu.ng',
         'Dr. J. A. Adedoyin (HOD)',
@@ -217,10 +215,10 @@ $submissions_history = $history_stmt->fetchAll();
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Tasks & Submissions Workspace</h1>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Submit progress logs, upload deliverables, and publish final report</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('tasks_submissions') ?></h1>
+        <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('submit_deliverables_desc') ?></p>
     </div>
-    <a href="student_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
+    <a href="student_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2" style="margin-bottom: 2rem;">
@@ -229,23 +227,23 @@ $submissions_history = $history_stmt->fetchAll();
         <!-- Submit Weekly Update -->
         <div class="card" style="margin-bottom: 1.5rem;">
             <div class="card-header">
-                <h3>Submit Weekly Progress Report</h3>
+                <h3><?= __('weekly_progress_report') ?></h3>
             </div>
             <div class="card-body">
                 <form action="student_submissions.php" method="POST">
                     <input type="hidden" name="submission_type" value="weekly">
 
                     <div class="form-group">
-                        <label for="weekly_title" class="form-label">Report Title / Week No.</label>
+                        <label for="weekly_title" class="form-label"><?= __('report_week') ?></label>
                         <input type="text" name="Tajuk" id="weekly_title" class="form-input" placeholder="e.g. Week 4 Progress Report" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="weekly_content" class="form-label">Log Activity Details (Kandungan)</label>
+                        <label for="weekly_content" class="form-label"><?= __('report_content') ?></label>
                         <textarea name="Kandungan" id="weekly_content" class="form-input" rows="4" placeholder="Explain tasks performed, findings, or challenges this week..." required></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit Weekly Log</button>
+                    <button type="submit" class="btn btn-primary"><?= __('submit') ?></button>
                 </form>
             </div>
         </div>
@@ -253,19 +251,19 @@ $submissions_history = $history_stmt->fetchAll();
         <!-- Submit Final Project Thesis -->
         <div class="card">
             <div class="card-header">
-                <h3>Submit Final Project Report</h3>
+                <h3><?= __('submit_final_report') ?></h3>
             </div>
             <div class="card-body">
                 <form action="student_submissions.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="submission_type" value="final">
 
                     <div class="form-group">
-                        <label for="final_file" class="form-label">Select Final Thesis PDF Document</label>
+                        <label for="final_file" class="form-label"><?= __('final_thesis') ?></label>
                         <input type="file" name="FinalReportFile" id="final_file" class="form-input" accept=".pdf" required>
                         <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Only PDF files are accepted. This will trigger a critical department review alert.</span>
                     </div>
 
-                    <button type="submit" class="btn btn-danger">Submit Final Project Report</button>
+                    <button type="submit" class="btn btn-danger"><?= __('submit_final_report') ?></button>
                 </form>
             </div>
         </div>
@@ -275,16 +273,16 @@ $submissions_history = $history_stmt->fetchAll();
     <div>
         <div class="card">
             <div class="card-header">
-                <h3>Upload Completed Task Deliverable</h3>
+                <h3><?= __('upload_task_file') ?></h3>
             </div>
             <div class="card-body">
                 <form action="student_submissions.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="submission_type" value="task">
 
                     <div class="form-group">
-                        <label for="task_dropdown" class="form-label">Select Assigned Task</label>
+                        <label for="task_dropdown" class="form-label"><?= __('select_task') ?></label>
                         <select name="ID_tugasan" id="task_dropdown" class="form-input" required>
-                            <option value="">-- Choose Assigned Task --</option>
+                            <option value=""><?= __('choose_task') ?></option>
                             <?php foreach ($pending_tasks as $t): ?>
                                 <option value="<?= $t['ID_tugasan'] ?>"><?= sanitize($t['Jenis']) ?> (Deadline: <?= date('d M Y', strtotime($t['Deadline'])) ?>)</option>
                             <?php endforeach; ?>
@@ -292,12 +290,12 @@ $submissions_history = $history_stmt->fetchAll();
                     </div>
 
                     <div class="form-group">
-                        <label for="task_file" class="form-label">Deliverable Document Attachment</label>
+                        <label for="task_file" class="form-label"><?= __('upload_file') ?></label>
                         <input type="file" name="DeliverableFile" id="task_file" class="form-input" accept=".pdf,.zip,.docx,.doc,.png,.jpg" required>
                         <span style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Accepted: PDF, ZIP, DOCX, Word, Images. Max 10MB.</span>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary btn-block">Upload Completed Task</button>
+                    <button type="submit" class="btn btn-secondary btn-block"><?= __('submit') ?></button>
                 </form>
             </div>
         </div>
@@ -307,7 +305,7 @@ $submissions_history = $history_stmt->fetchAll();
 <!-- Submissions History Ledger -->
 <div class="card">
     <div class="card-header">
-        <h3>Deliverable Submissions Ledger</h3>
+        <h3><?= __('my_submission_history') ?></h3>
     </div>
     <div class="card-body" style="padding: 0;">
         <div class="table-responsive">
@@ -338,7 +336,7 @@ $submissions_history = $history_stmt->fetchAll();
                                 <td>
                                     <?php if ($sub['File_Path']): ?>
                                         <a href="uploads/<?= urlencode($sub['File_Path']) ?>" style="color: var(--secondary); font-weight: 600; text-decoration: none;" download>
-                                            📄 Download (<?= sanitize(pathinfo($sub['File_Path'], PATHINFO_EXTENSION)) ?>)
+                                            📄 <?= __('download_file') ?> (<?= sanitize(pathinfo($sub['File_Path'], PATHINFO_EXTENSION)) ?>)
                                         </a>
                                     <?php else: ?>
                                         <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;">None</span>
@@ -346,11 +344,11 @@ $submissions_history = $history_stmt->fetchAll();
                                 </td>
                                 <td>
                                     <?php if ($sub['Status'] === 'Disemak'): ?>
-                                        <span class="badge badge-approved">Approved / Reviewed</span>
+                                        <span class="badge badge-approved"><?= __('approved') ?></span>
                                     <?php elseif ($sub['Status'] === 'Hantar Semula'): ?>
-                                        <span class="badge badge-resubmit">Resubmit Requested</span>
+                                        <span class="badge badge-resubmit"><?= __('resubmit') ?></span>
                                     <?php else: ?>
-                                        <span class="badge badge-pending">Pending Review</span>
+                                        <span class="badge badge-pending"><?= __('pending') ?></span>
                                     <?php endif; ?>
                                 </td>
                             </tr>

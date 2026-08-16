@@ -53,15 +53,15 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
 ?>
 
 <div style="margin-bottom: 2rem;">
-    <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Lecturer Workspace</h1>
-    <p style="color: var(--text-muted); font-size: 0.875rem;">FYP Management System — Oduduwa University Ipetumodu</p>
+    <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('supervisor_workspace') ?></h1>
+    <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('system_title') ?></p>
 </div>
 
 <!-- Stats Grid -->
 <div class="stats-grid">
     <div class="stat-card">
         <div class="stat-header">
-            <span>My Supervised Students</span>
+            <span><?= __('my_students_load') ?></span>
             <span>👨‍🎓</span>
         </div>
         <div class="stat-value"><?= $count_students ?></div>
@@ -70,7 +70,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     
     <div class="stat-card" style="border-top: 4px solid <?= $count_pending > 0 ? 'var(--warning)' : 'var(--border)' ?>;">
         <div class="stat-header">
-            <span>Pending Submissions Review</span>
+            <span><?= __('waiting_review') ?></span>
             <span>📥</span>
         </div>
         <div class="stat-value"><?= $count_pending ?></div>
@@ -79,7 +79,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
 
     <div class="stat-card">
         <div class="stat-header">
-            <span>Endorsed Tasks</span>
+            <span><?= __('approved') ?> Tasks</span>
             <span>✅</span>
         </div>
         <div class="stat-value"><?= $count_completed ?></div>
@@ -91,23 +91,23 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <!-- Supervised Students List -->
     <div class="card">
         <div class="card-header">
-            <h3>Assigned Students Registry</h3>
-            <a href="supervisor_students.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Monitor Details</a>
+            <h3><?= __('active_supervision_load') ?></h3>
+            <a href="supervisor_students.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><?= __('my_students') ?></a>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Project Title</th>
+                            <th><?= __('student') ?></th>
+                            <th><?= __('project_title') ?></th>
                             <th>Progress</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($assigned_students)): ?>
                             <tr>
-                                <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">No students assigned to your profile by the HOD.</td>
+                                <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;"><?= __('no_students_assigned') ?></td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($assigned_students as $stu): 
@@ -122,7 +122,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
                                         <?php if ($stu['Tajuk_Projek']): ?>
                                             <span style="font-size: 0.8rem; display: block; max-width: 250px; line-height: 1.3; font-weight: 500;"><?= sanitize($stu['Tajuk_Projek']) ?></span>
                                         <?php else: ?>
-                                            <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;">No project title registered yet</span>
+                                            <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;"><?= __('not_registered') ?></span>
                                         <?php endif; ?>
                                     </td>
                                     <td style="width: 120px;">
@@ -143,23 +143,23 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
     <!-- Recent Submissions Pending Feedback -->
     <div class="card">
         <div class="card-header">
-            <h3>Submissions & Deliverables</h3>
+            <h3><?= __('tasks_submissions') ?></h3>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Submission Type</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                            <th><?= __('student') ?></th>
+                            <th><?= __('submission_type') ?></th>
+                            <th><?= __('date') ?></th>
+                            <th><?= __('actions') ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($recent_submissions)): ?>
                             <tr>
-                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No student deliverables submitted.</td>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;"><?= __('no_submissions') ?></td>
                             </tr>
                         <?php else: ?>
                             <?php foreach ($recent_submissions as $sub): ?>
@@ -171,7 +171,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
                                     </td>
                                     <td><?= date('d M, H:i', strtotime($sub['Tarikh_Hantar'])) ?></td>
                                     <td>
-                                        <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;">Review</a>
+                                        <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><?= __('submit') ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -148,14 +148,14 @@ $comments = $comment_history_stmt->fetchAll();
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">Review Student Deliverable</h1>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Audit student submissions and provide feedback/assessments</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('review_submission') ?></h1>
+        <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('review_desc') ?></p>
     </div>
     
     <?php if ($user_role === 'HOD'): ?>
-        <a href="hod_reports.php" class="btn btn-secondary">⬅ Back to Reports</a>
+        <a href="hod_reports.php" class="btn btn-secondary">⬅ <?= __('back') ?></a>
     <?php else: ?>
-        <a href="supervisor_students.php?student_id=<?= urlencode($sub['No_matrik']) ?>" class="btn btn-secondary">⬅ Back to Student Details</a>
+        <a href="supervisor_students.php?student_id=<?= urlencode($sub['No_matrik']) ?>" class="btn btn-secondary">⬅ <?= __('back') ?></a>
     <?php endif; ?>
 </div>
 
@@ -164,24 +164,24 @@ $comments = $comment_history_stmt->fetchAll();
     <div>
         <div class="card" style="margin-bottom: 1.5rem;">
             <div class="card-header">
-                <h3>Submission Overview</h3>
+                <h3><?= __('submission_details') ?></h3>
             </div>
             <div class="card-body">
                 <div class="detail-list" style="margin-bottom: 1.5rem;">
                     <div class="detail-item">
-                        <span class="detail-label">Student Name:</span>
+                        <span class="detail-label"><?= __('student_name') ?>:</span>
                         <span class="detail-value"><?= sanitize($sub['StudentName']) ?> (<?= sanitize($sub['No_matrik']) ?>)</span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Deliverable Type:</span>
+                        <span class="detail-label"><?= __('submission_type') ?>:</span>
                         <span class="detail-value" style="text-transform: capitalize; font-weight: 700; color: var(--primary);"><?= sanitize($sub['Jenis_Hantaran']) ?></span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Title/Topic:</span>
+                        <span class="detail-label"><?= __('project_title') ?>:</span>
                         <span class="detail-value"><?= sanitize($sub['Tajuk']) ?></span>
                     </div>
                     <div class="detail-item">
-                        <span class="detail-label">Date Submitted:</span>
+                        <span class="detail-label"><?= __('date_submitted') ?>:</span>
                         <span class="detail-value"><?= date('d M Y, h:i A', strtotime($sub['Tarikh_Hantar'])) ?></span>
                     </div>
                     <?php if ($sub['ID_tugasan']): ?>
@@ -193,7 +193,7 @@ $comments = $comment_history_stmt->fetchAll();
                 </div>
 
                 <div style="background-color: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem; margin-bottom: 1.5rem;">
-                    <h4 style="margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600;">Submitted Log / Details:</h4>
+                    <h4 style="margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600;"><?= __('content_text') ?>:</h4>
                     <p style="font-size: 0.875rem; white-space: pre-wrap; color: var(--text-main);"><?= $sub['Kandungan'] ? sanitize($sub['Kandungan']) : '<em>No descriptive log text entered.</em>' ?></p>
                 </div>
 
@@ -203,7 +203,7 @@ $comments = $comment_history_stmt->fetchAll();
                             <span style="font-size: 1.5rem;">📄</span>
                             <div>
                                 <span style="font-size: 0.85rem; font-weight: 600; color: #166534;"><?= sanitize($sub['File_Path']) ?></span>
-                                <span style="display: block; font-size: 0.7rem; color: #15803d;">Student Deliverable Attachment</span>
+                                <span style="display: block; font-size: 0.7rem; color: #15803d;"><?= __('file_attachment') ?></span>
                             </div>
                         </div>
                         <!-- Download Link -->
@@ -216,7 +216,7 @@ $comments = $comment_history_stmt->fetchAll();
         <!-- Comments History -->
         <div class="card">
             <div class="card-header">
-                <h3>Feedback History</h3>
+                <h3><?= __('feedback_comments') ?></h3>
             </div>
             <div class="card-body">
                 <?php if (empty($comments)): ?>
@@ -249,7 +249,7 @@ $comments = $comment_history_stmt->fetchAll();
                     <input type="hidden" name="submit_review" value="1">
                     
                     <div class="form-group">
-                        <label for="Ulasan" class="form-label">Review / Feedback Comments</label>
+                        <label for="Ulasan" class="form-label"><?= __('feedback_comments') ?></label>
                         <textarea name="Ulasan" id="Ulasan" class="form-input" rows="6" placeholder="Provide notes, suggestions, or corrections here..." required></textarea>
                     </div>
 
@@ -284,7 +284,7 @@ $comments = $comment_history_stmt->fetchAll();
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Submit Assessment Review</button>
+                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.5rem;"><?= __('post_feedback') ?></button>
                 </form>
             </div>
         </div>

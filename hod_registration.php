@@ -155,49 +155,49 @@ $supervision_list = $pdo->query("
 
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <div>
-        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);">User Registration & Supervisor Allocation</h1>
-        <p style="color: var(--text-muted); font-size: 0.875rem;">Manage accounts and distribute supervision loads</p>
+        <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--bg-dark);"><?= __('user_mgmt') ?></h1>
+        <p style="color: var(--text-muted); font-size: 0.875rem;"><?= __('user_mgmt_desc') ?></p>
     </div>
-    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
+    <a href="hod_dashboard.php" class="btn btn-secondary">⬅ <?= __('back_to_dashboard') ?></a>
 </div>
 
 <div class="grid-2" style="margin-bottom: 2rem;">
     <!-- Add Student Card -->
     <div class="card">
         <div class="card-header">
-            <h3>Register New Student</h3>
+            <h3><?= __('reg_new_student') ?></h3>
         </div>
         <div class="card-body">
             <form action="hod_registration.php" method="POST" autocomplete="off">
                 <input type="hidden" name="register_student" value="1">
                 
                 <div class="form-group">
-                    <label for="No_matrik" class="form-label">Matric Number (No Matrik)</label>
+                    <label for="No_matrik" class="form-label"><?= __('matric_no') ?></label>
                     <input type="text" name="No_matrik" id="No_matrik" class="form-input" placeholder="CSC/2022/001" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="Nama_std" class="form-label">Full Name (Nama)</label>
+                    <label for="Nama_std" class="form-label"><?= __('full_name') ?></label>
                     <input type="text" name="Nama" id="Nama_std" class="form-input" placeholder="Adekunle Tobi" required>
                 </div>
 
                 <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
                     <div class="form-group">
-                        <label for="Semester" class="form-label">Semester</label>
+                        <label for="Semester" class="form-label"><?= __('semester') ?></label>
                         <input type="number" name="Semester" id="Semester" class="form-input" value="8" min="1" max="12" required>
                     </div>
                     <div class="form-group">
-                        <label for="Katalaluan_std" class="form-label">Password (Katalaluan)</label>
+                        <label for="Katalaluan_std" class="form-label"><?= __('password') ?></label>
                         <input type="password" name="Katalaluan" id="Katalaluan_std" class="form-input" placeholder="••••••••" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="Email_std" class="form-label">Email Address</label>
+                    <label for="Email_std" class="form-label"><?= __('email') ?></label>
                     <input type="email" name="Email" id="Email_std" class="form-input" placeholder="student@student.oduduwa.edu.ng" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Register Student</button>
+                <button type="submit" class="btn btn-primary btn-block"><?= __('register_button') ?></button>
             </form>
         </div>
     </div>
@@ -205,39 +205,39 @@ $supervision_list = $pdo->query("
     <!-- Add Supervisor Card -->
     <div class="card">
         <div class="card-header">
-            <h3>Register New Supervisor</h3>
+            <h3><?= __('reg_new_supervisor') ?></h3>
         </div>
         <div class="card-body">
             <form action="hod_registration.php" method="POST" autocomplete="off">
                 <input type="hidden" name="register_supervisor" value="1">
 
                 <div class="form-group">
-                    <label for="No_staf" class="form-label">Staff Number (No Staf)</label>
+                    <label for="No_staf" class="form-label"><?= __('staff_no') ?></label>
                     <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="Lec003" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="Nama_sup" class="form-label">Full Name (Nama)</label>
+                    <label for="Nama_sup" class="form-label"><?= __('full_name') ?></label>
                     <input type="text" name="Nama" id="Nama_sup" class="form-input" placeholder="Dr. Samuel Alabi" required>
                 </div>
 
                 <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
                     <div class="form-group">
-                        <label for="Jawatan" class="form-label">Designation / Title (Jawatan)</label>
+                        <label for="Jawatan" class="form-label"><?= __('designation') ?></label>
                         <input type="text" name="Jawatan" id="Jawatan" class="form-input" placeholder="Senior Lecturer" required>
                     </div>
                     <div class="form-group">
-                        <label for="Katalaluan_sup" class="form-label">Password (Katalaluan)</label>
+                        <label for="Katalaluan_sup" class="form-label"><?= __('password') ?></label>
                         <input type="password" name="Katalaluan" id="Katalaluan_sup" class="form-input" placeholder="••••••••" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="Email_sup" class="form-label">Email Address</label>
+                    <label for="Email_sup" class="form-label"><?= __('email') ?></label>
                     <input type="email" name="Email" id="Email_sup" class="form-input" placeholder="lecturer@oduduwa.edu.ng" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Register Supervisor</button>
+                <button type="submit" class="btn btn-primary btn-block"><?= __('register_button') ?></button>
             </form>
         </div>
     </div>
@@ -247,16 +247,16 @@ $supervision_list = $pdo->query("
     <!-- Allocation Form -->
     <div class="card">
         <div class="card-header">
-            <h3>Assign Student to Supervisor</h3>
+            <h3><?= __('assign_stud_sup') ?></h3>
         </div>
         <div class="card-body">
             <form action="hod_registration.php" method="POST">
                 <input type="hidden" name="assign_supervisor" value="1">
                 
                 <div class="form-group">
-                    <label for="alloc_student" class="form-label">Select Student</label>
+                    <label for="alloc_student" class="form-label"><?= __('select_student') ?></label>
                     <select name="No_matrik" id="alloc_student" class="form-input" required>
-                        <option value="">-- Choose Student --</option>
+                        <option value=""><?= __('choose_student') ?></option>
                         <?php foreach ($students as $stu): ?>
                             <option value="<?= sanitize($stu['No_matrik']) ?>"><?= sanitize($stu['Nama']) ?> (<?= sanitize($stu['No_matrik']) ?>)</option>
                         <?php endforeach; ?>
@@ -264,16 +264,16 @@ $supervision_list = $pdo->query("
                 </div>
 
                 <div class="form-group">
-                    <label for="alloc_supervisor" class="form-label">Select Supervisor</label>
+                    <label for="alloc_supervisor" class="form-label"><?= __('select_supervisor') ?></label>
                     <select name="No_staf" id="alloc_supervisor" class="form-input" required>
-                        <option value="">-- Choose Supervisor --</option>
+                        <option value=""><?= __('choose_supervisor') ?></option>
                         <?php foreach ($supervisors as $sup): ?>
                             <option value="<?= sanitize($sup['No_staf']) ?>"><?= sanitize($sup['Nama']) ?> (<?= sanitize($sup['No_staf']) ?>)</option>
                         <?php endforeach; ?>
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-secondary btn-block">Link Supervision Assignment</button>
+                <button type="submit" class="btn btn-secondary btn-block"><?= __('link_assignment') ?></button>
             </form>
         </div>
     </div>
@@ -281,16 +281,16 @@ $supervision_list = $pdo->query("
     <!-- Active Assignments Listing -->
     <div class="card">
         <div class="card-header">
-            <h3>Active Supervision Registry</h3>
+            <h3><?= __('supervision_registry') ?></h3>
         </div>
         <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Assigned Supervisor</th>
-                            <th>Project Title</th>
+                            <th><?= __('student') ?></th>
+                            <th><?= __('assigned_supervisor') ?></th>
+                            <th><?= __('project_title') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -309,7 +309,7 @@ $supervision_list = $pdo->query("
                                         <?php if ($row['SupervisorName']): ?>
                                             <span style="color: var(--secondary); font-weight: 500;"><?= sanitize($row['SupervisorName']) ?></span>
                                         <?php else: ?>
-                                            <span style="color: var(--danger); font-style: italic; font-size: 0.8rem;">Not Assigned</span>
+                                            <span style="color: var(--danger); font-style: italic; font-size: 0.8rem;"><?= __('not_assigned') ?></span>
                                         <?php endif; ?>
                                     </td>
                                     <td>
