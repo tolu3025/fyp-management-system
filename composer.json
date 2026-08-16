@@ -3,7 +3,7 @@
     "description": "FYP Management System — Oduduwa University Ipetumodu",
     "type": "project",
     "require": {
-        "php": ">=7.4",
+        "php": "8.2",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*"
     }
