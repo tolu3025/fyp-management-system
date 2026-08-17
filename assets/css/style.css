@@ -948,26 +948,123 @@ body {
     color: var(--primary);
 }
 
+/* Sidebar lists reset */
+.sidebar-menu ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Mobile Toggle and Close Buttons (hidden on desktop) */
+.mobile-menu-toggle {
+    display: none;
+}
+
+.mobile-sidebar-close {
+    display: none;
+}
+
 /* Responsive Overrides */
 @media (max-width: 992px) {
-    .dashboard-wrapper {
-        flex-direction: column;
+    /* Enable Hamburger Toggle Button */
+    .mobile-menu-toggle {
+        display: inline-flex;
+        background: none;
+        border: none;
+        font-size: 1.35rem;
+        color: var(--bg-dark);
+        cursor: pointer;
+        padding: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+        transition: background-color 0.2s ease;
     }
+    
+    .mobile-menu-toggle:hover {
+        background-color: var(--bg-light);
+    }
+    
+    /* Enable Close Button in Sidebar Header */
+    .mobile-sidebar-close {
+        display: inline-flex;
+        background: none;
+        border: none;
+        font-size: 1.35rem;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s ease;
+    }
+    
+    .mobile-sidebar-close:hover {
+        color: white;
+    }
+    
+    /* Transform Sidebar into Off-Canvas Drawer */
     .sidebar {
+        position: fixed;
+        top: 0;
+        left: -290px; /* Hide offscreen */
+        width: 290px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .sidebar.show {
+        left: 0; /* Slide-in drawer */
+    }
+    
+    .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+    }
+    
+    .sidebar-backdrop.show {
+        display: block;
+    }
+    
+    /* Main Content adjustments */
+    .main-content {
         width: 100%;
     }
-    .sidebar-header {
-        padding: 1.5rem;
+    
+    .top-nav {
+        padding: 0 1.5rem;
     }
-    .sidebar-menu {
-        display: flex;
-        flex-wrap: wrap;
-        padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .user-meta-name {
+        display: none; /* Hide name on small screens, show avatar only */
     }
-    .sidebar-item {
-        margin: 0.25rem;
+    
+    .nav-actions {
+        gap: 1.25rem;
     }
-    .sidebar-user {
-        display: none;
+}
+
+@media (max-width: 576px) {
+    .page-title {
+        font-size: 1.1rem;
+    }
+    
+    .top-nav {
+        padding: 0 1rem;
+    }
+    
+    .nav-actions {
+        gap: 1rem;
     }
 }

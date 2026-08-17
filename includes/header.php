@@ -45,8 +45,13 @@ $notifications = $stmt->fetchAll();
         <div class="main-content">
             <!-- Top Nav Panel -->
             <header class="top-nav">
-                <div class="page-title">
-                    <?= __('login_title') ?>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <?= __('login_title') ?>
+                    </div>
                 </div>
                 
                 <div class="nav-actions">
@@ -100,7 +105,7 @@ $notifications = $stmt->fetchAll();
                     <!-- User Account Meta -->
                     <div style="font-size: 0.875rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; color: var(--bg-dark);">
                         <i class="fa-solid fa-circle-user" style="font-size: 1.1rem; color: var(--primary-light);"></i>
-                        <span><?= sanitize($user_name) ?></span>
+                        <span class="user-meta-name"><?= sanitize($user_name) ?></span>
                     </div>
                 </div>
             </header>

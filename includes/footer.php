@@ -38,6 +38,9 @@ if (file_exists($log_file)) {
         </div>
     </div>
     
+    <!-- Sidebar backdrop for mobile -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    
     <!-- Custom Application Javascript -->
     <script src="assets/js/app.js"></script>
 </body>

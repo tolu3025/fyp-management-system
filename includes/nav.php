@@ -5,9 +5,14 @@
 $currentPage = basename($_SERVER['PHP_SELF']);
 $role = $_SESSION['user_role'] ?? '';
 ?>
-<aside class="sidebar">
+<aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <h2><i class="fa-solid fa-laptop-code"></i> FYP Portal</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h2><i class="fa-solid fa-laptop-code"></i> FYP Portal</h2>
+            <button class="mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close Menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
         <p>Oduduwa University</p>
     </div>
     

@@ -197,4 +197,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 6. Mobile Collapsible Sidebar Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileSidebarClose = document.getElementById('mobileSidebarClose');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+    if (mobileMenuToggle && sidebar && sidebarBackdrop) {
+        // Function to open sidebar
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.add('show');
+            sidebarBackdrop.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent main page scrolling
+        });
+
+        // Function to close sidebar
+        const closeSidebar = () => {
+            sidebar.classList.remove('show');
+            sidebarBackdrop.classList.remove('show');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        };
+
+        if (mobileSidebarClose) {
+            mobileSidebarClose.addEventListener('click', closeSidebar);
+        }
+
+        sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
 });
