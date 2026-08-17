@@ -155,14 +155,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 
+                // Add loading class and update innerHTML
                 submitBtn.classList.add('btn-loading');
-                if (submitBtn.tagName === 'BUTTON') {
-                    submitBtn.disabled = true;
-                }
-                
                 const originalHtml = submitBtn.innerHTML;
                 submitBtn.setAttribute('data-original-html', originalHtml);
                 submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Please wait...';
+                
+                // Defer disabling the button so that the browser successfully initiates
+                // form submission and serializes all values before the button becomes disabled.
+                setTimeout(() => {
+                    if (submitBtn.tagName === 'BUTTON') {
+                        submitBtn.disabled = true;
+                    }
+                }, 10);
             }
         });
     });
