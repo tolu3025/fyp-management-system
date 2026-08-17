@@ -2,6 +2,8 @@
 // includes/functions.php
 // Common utility functions, session management, alert notifications, and simulated email log dispatch
 
+ob_start();
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
