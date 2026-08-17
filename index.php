@@ -6,6 +6,13 @@
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
 
+// Handle logout
+if (isset($_GET['logout']) && $_GET['logout'] === 'true') {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
 // Redirect if already logged in
 if (isLoggedIn()) {
     if ($_SESSION['user_role'] === 'HOD') {
