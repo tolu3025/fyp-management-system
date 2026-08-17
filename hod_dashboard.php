@@ -27,6 +27,17 @@ $recent_tasks_stmt = $pdo->query("
     ORDER BY t.Tarikh DESC LIMIT 5
 ");
 $recent_tasks = $recent_tasks_stmt->fetchAll();
+
+// Fetch all registered students for HOD dashboard display
+$students_list_stmt = $pdo->query("
+    SELECT s.No_matrik, s.Nama AS StudentName, s.Email AS StudentEmail, s.Semester,
+           l.Nama AS SupervisorName, p.Tajuk_Projek 
+    FROM Student s
+    LEFT JOIN Project p ON s.No_matrik = p.No_matrik
+    LEFT JOIN Supervisor l ON p.No_staf = l.No_staf
+    ORDER BY s.Nama ASC
+");
+$students_list = $students_list_stmt->fetchAll();
 ?>
 
 <div style="margin-bottom: 2rem;">
@@ -160,6 +171,61 @@ $recent_tasks = $recent_tasks_stmt->fetchAll();
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Registered Students Registry -->
+<div class="card" style="margin-top: 2rem;">
+    <div class="card-header">
+        <h3>Registered Students (Departmental Registry)</h3>
+        <a href="hod_registration.php" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;"><i class="fa-solid fa-user-plus"></i> <?= __('user_mgmt') ?></a>
+    </div>
+    <div class="card-body" style="padding: 0;">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><?= __('student') ?></th>
+                        <th><?= __('email') ?></th>
+                        <th style="text-align: center;"><?= __('semester') ?></th>
+                        <th><?= __('assigned_supervisor') ?></th>
+                        <th><?= __('project_title') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($students_list)): ?>
+                        <tr>
+                            <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No registered students found.</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($students_list as $stu): ?>
+                            <tr>
+                                <td>
+                                    <strong><?= sanitize($stu['StudentName']) ?></strong><br>
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);"><?= sanitize($stu['No_matrik']) ?></span>
+                                </td>
+                                <td><?= sanitize($stu['StudentEmail']) ?></td>
+                                <td style="text-align: center; font-weight: 600;"><?= sanitize($stu['Semester']) ?></td>
+                                <td>
+                                    <?php if ($stu['SupervisorName']): ?>
+                                        <span style="color: var(--secondary); font-weight: 600;"><i class="fa-solid fa-chalkboard-user"></i> <?= sanitize($stu['SupervisorName']) ?></span>
+                                    <?php else: ?>
+                                        <span class="badge badge-pending" style="font-size: 0.75rem;"><i class="fa-solid fa-triangle-exclamation"></i> Unassigned</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if ($stu['Tajuk_Projek']): ?>
+                                        <span style="font-size: 0.85rem; font-weight: 500;"><?= sanitize($stu['Tajuk_Projek']) ?></span>
+                                    <?php else: ?>
+                                        <span style="color: var(--text-muted); font-style: italic; font-size: 0.8rem;">Pending discussion</span>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

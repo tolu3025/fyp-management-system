@@ -42,17 +42,18 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     
-    // 2. Database Auto-Builder: Checks if tables exist and seeds them if missing.
+    // 2. Database Auto-Builder: Checks if tables exist and seeds them if missing/empty.
     // This removes the need for manual SQL import on Railway.
-    $tableExists = false;
+    $tableExistsAndSeeded = false;
     try {
-        $result = $pdo->query("SELECT 1 FROM HOD LIMIT 1");
-        $tableExists = ($result !== false);
+        $result = $pdo->query("SELECT COUNT(*) FROM HOD");
+        $count = $result ? $result->fetchColumn() : 0;
+        $tableExistsAndSeeded = ($count > 0);
     } catch (\PDOException $e) {
-        $tableExists = false;
+        $tableExistsAndSeeded = false;
     }
 
-    if (!$tableExists) {
+    if (!$tableExistsAndSeeded) {
         $sql_file = __DIR__ . '/../db/fyp_db.sql';
         if (file_exists($sql_file)) {
             $sql = file_get_contents($sql_file);

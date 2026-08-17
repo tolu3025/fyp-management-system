@@ -302,6 +302,39 @@ body {
     width: 100%;
 }
 
+.btn:disabled, .btn.btn-loading {
+    opacity: 0.65;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Password Viewer Wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper .form-input {
+    padding-right: 3rem !important;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 1.15rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+.password-toggle-icon:hover {
+    color: var(--text-main);
+}
+
 /* Alerts */
 .alert {
     padding: 1rem 1.25rem;
