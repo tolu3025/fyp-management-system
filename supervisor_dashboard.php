@@ -171,7 +171,7 @@ $recent_submissions = $recent_submissions_stmt->fetchAll();
                                     </td>
                                     <td><?= date('d M, H:i', strtotime($sub['Tarikh_Hantar'])) ?></td>
                                     <td>
-                                        <a href="supervisor_review.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-magnifying-glass"></i> <?= __('submit') ?></a>
+                                        <a href="submission_details.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;"><i class="fa-solid fa-magnifying-glass"></i> <?= __('submit') ?></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

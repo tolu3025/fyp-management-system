@@ -8,7 +8,7 @@ $role = $_SESSION['user_role'] ?? '';
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <h2><i class="fa-solid fa-laptop-code"></i> FYP Portal</h2>
+            <h2><i class="fa-solid fa-laptop-code"></i> CS FYP Portal</h2>
             <button class="mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close Menu">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -46,7 +46,7 @@ $role = $_SESSION['user_role'] ?? '';
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="supervisor_students.php" class="sidebar-link <?= $currentPage === 'supervisor_students.php' || $currentPage === 'supervisor_tasks.php' || $currentPage === 'supervisor_review.php' ? 'active' : '' ?>">
+                    <a href="supervisor_students.php" class="sidebar-link <?= $currentPage === 'supervisor_students.php' || $currentPage === 'supervisor_tasks.php' || $currentPage === 'submission_details.php' ? 'active' : '' ?>">
                         <i class="fa-solid fa-users-viewfinder"></i> <?= __('my_students') ?>
                     </a>
                 </li>

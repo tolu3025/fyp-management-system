@@ -284,7 +284,7 @@ $submissions_history = $history_stmt->fetchAll();
                         <select name="ID_tugasan" id="task_dropdown" class="form-input" required>
                             <option value=""><?= __('choose_task') ?></option>
                             <?php foreach ($pending_tasks as $t): ?>
-                                <option value="<?= $t['ID_tugasan'] ?>"><?= sanitize($t['Jenis']) ?> (Deadline: <?= date('d M Y', strtotime($t['Deadline'])) ?>)</option>
+                                <option value="<?= $t['ID_tugasan'] ?>" <?= (isset($_GET['task_id']) && intval($_GET['task_id']) === $t['ID_tugasan']) ? 'selected' : '' ?>><?= sanitize($t['Jenis']) ?> (Deadline: <?= date('d M Y', strtotime($t['Deadline'])) ?>)</option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -317,12 +317,13 @@ $submissions_history = $history_stmt->fetchAll();
                         <th>Date Submitted</th>
                         <th>Attachment</th>
                         <th>Status</th>
+                        <th>Feedback</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($submissions_history)): ?>
                         <tr>
-                            <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No items submitted yet. Use the forms above to make a submission.</td>
+                            <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">No items submitted yet. Use the forms above to make a submission.</td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($submissions_history as $sub): ?>
@@ -349,6 +350,19 @@ $submissions_history = $history_stmt->fetchAll();
                                         <span class="badge badge-resubmit"><?= __('resubmit') ?></span>
                                     <?php else: ?>
                                         <span class="badge badge-pending"><?= __('pending') ?></span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    // Query comments count for this submission
+                                    $c_stmt = $pdo->prepare("SELECT COUNT(*) FROM Comments WHERE ID_hantaran = ?");
+                                    $c_stmt->execute([$sub['ID_hantaran']]);
+                                    $c_count = $c_stmt->fetchColumn();
+
+                                    if ($c_count > 0): ?>
+                                        <a href="submission_details.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.35rem 0.6rem; font-size: 0.75rem; border-color: var(--primary-light); color: var(--primary);"><i class="fa-solid fa-comments"></i> <?= __('view_remarks') ?> (<?= $c_count ?>)</a>
+                                    <?php else: ?>
+                                        <a href="submission_details.php?id=<?= $sub['ID_hantaran'] ?>" class="btn btn-secondary" style="padding: 0.35rem 0.6rem; font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-eye"></i> <?= __('view_details') ?></a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

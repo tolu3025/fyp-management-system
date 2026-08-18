@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="login.php" method="POST" autocomplete="off">
                 <div class="form-group">
                     <label for="login_id" class="form-label"><?= __('username_or_id') ?></label>
-                    <input type="text" name="login_id" id="login_id" class="form-input" placeholder="e.g. CSC/2022/001 or HOD001" required value="<?= isset($_POST['login_id']) ? sanitize($_POST['login_id']) : '' ?>">
+                    <input type="text" name="login_id" id="login_id" class="form-input" placeholder="e.g. CSC/2022/001 or dralabi" required value="<?= isset($_POST['login_id']) ? sanitize($_POST['login_id']) : '' ?>">
                 </div>
 
                 <div class="form-group">

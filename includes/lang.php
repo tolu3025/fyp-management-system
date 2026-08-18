@@ -5,8 +5,8 @@
 $lang_dict = [
     'en' => [
         // Branding & Headers
-        'system_title' => 'FYP Management System — Oduduwa University Ipetumodu',
-        'login_title' => 'FYP Management System',
+        'system_title' => 'Computer Science FYP Portal — Oduduwa University',
+        'login_title' => 'CS Department FYP Portal',
         'login_subtitle' => 'Oduduwa University Ipetumodu',
         'dept_title' => 'Department of Computer Science',
         'college_title' => 'Ramon Adedoyin College of Natural and Applied Sciences',
@@ -37,12 +37,12 @@ $lang_dict = [
         'password' => 'Password',
         'semester' => 'Semester',
         'email' => 'Email Address',
-        'staff_no' => 'Staff Number',
+        'staff_no' => 'Lecturer Username',
         'designation' => 'Designation / Title',
         'select_student' => 'Select Student',
         'select_supervisor' => 'Select Supervisor',
         'choose_student' => '-- Choose Student --',
-        'choose_supervisor' => '-- Choose Supervisor --',
+        'choose_supervisor' => '-- Choose Lecturer --',
         'project_title' => 'Project Topic / Title',
         
         // Status Terms
@@ -64,7 +64,7 @@ $lang_dict = [
         'supervisor_role' => 'Supervisor (Lecturer)',
         'already_have_account' => 'Already have an account? Log In',
         'dont_have_account' => "Don't have an account? Register Here",
-        'username_or_id' => 'Username / Matric / Staff ID',
+        'username_or_id' => 'Username / Matric Number',
         
         // HOD Dashboard
         'hod_workspace' => 'HOD Administration',
@@ -178,11 +178,19 @@ $lang_dict = [
         'landing_student_title' => 'Student',
         'landing_student_desc' => 'Register agreed project topics, review deadlines, upload weekly logs, and submit final thesis documents.',
         'ready_to_start' => 'Ready to get started?',
+        
+        // Submission Details / Remarks
+        'view_remarks' => 'View Remarks',
+        'view_details' => 'View Details',
+        'corrections_requested' => 'Corrections Requested',
+        'corrections_requested_desc' => 'Your supervisor has requested corrections. Please review the remarks below and submit an updated version.',
+        'assessment_decision' => 'Assessment & Endorsement Form',
+        'comments_timeline' => 'Feedback Remarks Timeline',
     ],
     'ms' => [
         // Branding & Headers
-        'system_title' => 'Sistem Pengurusan FYP — Universiti Oduduwa Ipetumodu',
-        'login_title' => 'Sistem Pengurusan FYP',
+        'system_title' => 'Portal FYP Sains Komputer — Universiti Oduduwa',
+        'login_title' => 'Portal FYP Jabatan Sains Komputer',
         'login_subtitle' => 'Universiti Oduduwa Ipetumodu',
         'dept_title' => 'Jabatan Sains Komputer',
         'college_title' => 'Kolej Sains Semula Jadi dan Gunaan Ramon Adedoyin',
@@ -213,12 +221,12 @@ $lang_dict = [
         'password' => 'Katalaluan',
         'semester' => 'Semester',
         'email' => 'Alamat E-mel',
-        'staff_no' => 'No Staf',
+        'staff_no' => 'Nama Pengguna Pensyarah',
         'designation' => 'Jawatan / Gelaran',
         'select_student' => 'Pilih Pelajar',
         'select_supervisor' => 'Pilih Penyelia',
         'choose_student' => '-- Pilih Pelajar --',
-        'choose_supervisor' => '-- Pilih Penyelia --',
+        'choose_supervisor' => '-- Pilih Pensyarah --',
         'project_title' => 'Topik / Tajuk Projek',
         
         // Status Terms
@@ -240,7 +248,7 @@ $lang_dict = [
         'supervisor_role' => 'Penyelia (Pensyarah)',
         'already_have_account' => 'Sudah mempunyai akaun? Log Masuk',
         'dont_have_account' => "Belum mempunyai akaun? Daftar di Sini",
-        'username_or_id' => 'Nama Pengguna / No Matrik / Staf ID',
+        'username_or_id' => 'Nama Pengguna / No Matrik',
         
         // HOD Dashboard
         'hod_workspace' => 'Pentadbiran HOD',
@@ -354,5 +362,13 @@ $lang_dict = [
         'landing_student_title' => 'Pelajar',
         'landing_student_desc' => 'Daftar topik projek yang dipersetujui, semak tarikh akhir, muat naik log mingguan, dan hantar dokumen tesis akhir.',
         'ready_to_start' => 'Sedia untuk bermula?',
+        
+        // Submission Details / Remarks
+        'view_remarks' => 'Semak Ulasan',
+        'view_details' => 'Lihat Butiran',
+        'corrections_requested' => 'Pembetulan Diperlukan',
+        'corrections_requested_desc' => 'Penyelia anda telah meminta pembetulan. Sila semak ulasan di bawah dan hantar semula versi dikemas kini.',
+        'assessment_decision' => 'Borang Penilaian & Pengesahan',
+        'comments_timeline' => 'Garis Masa Maklum Balas',
     ]
 ];

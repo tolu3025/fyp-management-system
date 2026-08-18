@@ -26,7 +26,7 @@ if (isset($_POST['register_student'])) {
             $check_lec->execute([$no_matrik]);
             
             if ($check->fetchColumn() > 0 || $check_lec->fetchColumn() > 0 || $no_matrik === 'HOD001') {
-                $_SESSION['error_msg'] = "Account ID '$no_matrik' is already in use.";
+                $_SESSION['error_msg'] = "Username / Matric ID '$no_matrik' is already in use.";
             } else {
                 $hash = password_hash($katalaluan, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("INSERT INTO Student (No_matrik, Nama, Katalaluan, Semester, Email) VALUES (?, ?, ?, ?, ?)");
@@ -61,7 +61,7 @@ if (isset($_POST['register_supervisor'])) {
             $check_stu->execute([$no_staf]);
 
             if ($check->fetchColumn() > 0 || $check_stu->fetchColumn() > 0 || $no_staf === 'HOD001') {
-                $_SESSION['error_msg'] = "Account ID '$no_staf' is already in use.";
+                $_SESSION['error_msg'] = "Lecturer Username '$no_staf' is already in use.";
             } else {
                 $hash = password_hash($katalaluan, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("INSERT INTO Supervisor (No_staf, Nama, Katalaluan, Jawatan, Email) VALUES (?, ?, ?, ?, ?)");
@@ -213,7 +213,7 @@ $supervision_list = $pdo->query("
 
                 <div class="form-group">
                     <label for="No_staf" class="form-label"><?= __('staff_no') ?></label>
-                    <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="Lec003" required>
+                    <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="e.g. dralabi" required>
                 </div>
 
                 <div class="form-group">
