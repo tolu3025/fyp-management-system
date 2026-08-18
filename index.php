@@ -1,17 +1,10 @@
 <?php
 // index.php
-// Redesigned: Clean Landing Page for the Ramon Adedoyin College of Natural and Applied Sciences, Oduduwa University Ipetumodu
-// Redirects logged-in users to dashboards, displays live stats, role details, and global language selector.
+// Redesigned: Cyberpunk High-Tech landing page for Oduduwa University Computer Science FYP Portal.
+// Features glowing neon styling, glassmorphism, stats system diagnostics, and illustration nodes.
 
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
-
-// Handle logout
-if (isset($_GET['logout']) && $_GET['logout'] === 'true') {
-    session_destroy();
-    header("Location: login.php");
-    exit();
-}
 
 // Redirect if already logged in
 if (isLoggedIn()) {
@@ -35,7 +28,7 @@ try {
     $supervisor_count = $pdo->query("SELECT COUNT(*) FROM Supervisor")->fetchColumn();
     $project_count = $pdo->query("SELECT COUNT(*) FROM Project WHERE Tajuk_Projek IS NOT NULL")->fetchColumn();
 } catch (PDOException $e) {
-    // If database connection fails during initial load, fallback gracefully
+    // Graceful fallback if database is not active
 }
 ?>
 <!DOCTYPE html>
@@ -48,12 +41,12 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="cyber-theme">
     <!-- Public Header -->
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>FYP Portal</span>
+            <span>CS FYP Portal</span>
         </a>
         <div style="display: flex; align-items: center; gap: 1.5rem;">
             <!-- Language Selector Dropdown -->
@@ -66,84 +59,121 @@ try {
                     </select>
                 </form>
             </div>
-            <a href="login.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;"><?= __('login_button') ?></a>
+            <a href="login.php?mode=login" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: rgba(255,255,255,0.15); background: transparent; color: #ffffff;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1 class="hero-title"><?= __('landing_hero_title') ?></h1>
-        <p class="hero-desc"><?= __('landing_hero_desc') ?></p>
-        <div class="hero-actions">
-            <a href="login.php" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1rem;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
-            <a href="register.php" class="btn btn-secondary" style="padding: 0.8rem 2rem; font-size: 1rem;"><i class="fa-solid fa-user-plus"></i> <?= __('register_button') ?></a>
-        </div>
-    </section>
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; text-align: left; padding: 0 1rem;">
+            <!-- Left Pane: Hero Details -->
+            <div>
+                <span style="font-family: monospace; font-size: 0.9rem; color: var(--cyber-glow-pink); text-transform: uppercase; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.75rem;">[ SYSTEM ACCESS INITIALIZATION ]</span>
+                <h1 class="hero-title"><?= __('landing_hero_title') ?></h1>
+                <p class="hero-desc"><?= __('landing_hero_desc') ?></p>
+                <div class="hero-actions" style="justify-content: flex-start;">
+                    <a href="login.php?mode=login" class="btn btn-cyber-cyan" style="padding: 0.85rem 2rem; font-size: 0.95rem;"><i class="fa-solid fa-right-to-bracket"></i> Connect Terminal</a>
+                    <a href="login.php?mode=register" class="btn btn-cyber-primary" style="padding: 0.85rem 2rem; font-size: 0.95rem;"><i class="fa-solid fa-network-wired"></i> Initialize Node</a>
+                </div>
+            </div>
 
-    <!-- Live Statistics Counter -->
-    <section style="background-color: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 3.5rem 1rem;">
-        <div class="stats-grid" style="max-width: 1000px; margin: 0 auto; grid-template-columns: repeat(3, 1fr);">
+            <!-- Right Pane: Floating holographic illustration -->
             <div style="text-align: center;">
-                <div style="font-size: 2.75rem; font-weight: 800; color: var(--primary); letter-spacing: -0.03em;"><?= $student_count ?></div>
-                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 700; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;"><?= __('total_students') ?></div>
-            </div>
-            <div style="text-align: center; border-left: 1px solid var(--border); border-right: 1px solid var(--border);">
-                <div style="font-size: 2.75rem; font-weight: 800; color: var(--secondary); letter-spacing: -0.03em;"><?= $supervisor_count ?></div>
-                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 700; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;"><?= __('total_supervisors') ?></div>
-            </div>
-            <div style="text-align: center;">
-                <div style="font-size: 2.75rem; font-weight: 800; color: var(--success); letter-spacing: -0.03em;"><?= $project_count ?></div>
-                <div style="color: var(--text-muted); font-size: 0.9rem; font-weight: 700; margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;"><?= __('assigned_projects') ?></div>
+                <div class="cyber-illustration-container">
+                    <img src="assets/images/illustrations1.png" alt="Holographic Interface" style="max-width: 100%; height: auto; display: block;">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Role Explanation Section -->
-    <section style="padding: 5rem 1rem; background-color: var(--bg-light);">
-        <h2 style="text-align: center; font-size: 2.25rem; font-weight: 850; color: var(--bg-dark); margin-bottom: 3.5rem; letter-spacing: -0.03em;"><?= __('landing_roles_title') ?></h2>
-        
-        <div class="portal-grid-3" style="padding-top: 0; padding-bottom: 0;">
-            <!-- HOD Card -->
-            <div class="portal-card">
-                <div class="icon-wrapper">
-                    <i class="fa-solid fa-user-tie"></i>
+    <!-- Live System Diagnostics Stats -->
+    <section style="background-color: var(--cyber-gray); border-top: 1px solid var(--cyber-border); border-bottom: 1px solid var(--cyber-border); padding: 4rem 1rem;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <span style="font-family: monospace; font-size: 0.8rem; color: var(--cyber-glow-cyan); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; display: block; text-align: center; margin-bottom: 2.5rem;">[ DIAGNOSTICS: ACTIVE SYSTEM METRICS ]</span>
+            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="cyber-card" style="text-align: center;">
+                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">STUDENT NODES</div>
+                    <div style="font-size: 2.75rem; font-weight: 850; color: var(--cyber-glow-pink); letter-spacing: -0.03em;"><?= $student_count ?></div>
+                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ STATUS: ONLINE ]</span>
                 </div>
-                <h3><?= __('landing_hod_title') ?></h3>
-                <p><?= __('landing_hod_desc') ?></p>
-                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
+                <div class="cyber-card" style="text-align: center;">
+                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">LECTURER NODES</div>
+                    <div style="font-size: 2.75rem; font-weight: 850; color: var(--cyber-glow-cyan); letter-spacing: -0.03em;"><?= $supervisor_count ?></div>
+                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ STATUS: ONLINE ]</span>
+                </div>
+                <div class="cyber-card" style="text-align: center;">
+                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">ACTIVE PROJECTS</div>
+                    <div style="font-size: 2.75rem; font-weight: 850; color: #eab308; letter-spacing: -0.03em;"><?= $project_count ?></div>
+                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ CORE INTEGRITY: STABLE ]</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Node Gateways Section (replacing plain role cards) -->
+    <section style="padding: 6rem 1rem; background-color: var(--cyber-dark);">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; padding: 0 1rem;">
+            <!-- Left Pane: Illustration -->
+            <div style="text-align: center;">
+                <div class="cyber-illustration-container" style="box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(6, 182, 212, 0.15);">
+                    <img src="assets/images/illustrations2.png" alt="Console Interface Control" style="max-width: 100%; height: auto; display: block;">
+                </div>
             </div>
 
-            <!-- Supervisor Card -->
-            <div class="portal-card">
-                <div class="icon-wrapper">
-                    <i class="fa-solid fa-chalkboard-user"></i>
-                </div>
-                <h3><?= __('landing_supervisor_title') ?></h3>
-                <p><?= __('landing_supervisor_desc') ?></p>
-                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
-            </div>
+            <!-- Right Pane: High-Tech Node Terminals -->
+            <div>
+                <span style="font-family: monospace; font-size: 0.8rem; color: var(--cyber-glow-pink); text-transform: uppercase; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.75rem;">[ GATEWAY CONTROL ACCESS NODES ]</span>
+                <h2 style="font-size: 2.25rem; font-weight: 850; color: #ffffff; margin-bottom: 2rem; letter-spacing: -0.02em;">Tailored Portal Modules</h2>
 
-            <!-- Student Card -->
-            <div class="portal-card">
-                <div class="icon-wrapper">
-                    <i class="fa-solid fa-user-graduate"></i>
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- HOD Terminal -->
+                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
+                        <div style="font-size: 1.5rem; color: var(--cyber-glow-cyan); margin-top: 0.25rem;"><i class="fa-solid fa-user-tie"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                                HOD Administrative Terminal
+                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Allocate supervisors, configure departmental milestones, and audit system compliance reports.</p>
+                        </div>
+                    </div>
+
+                    <!-- Supervisor Terminal -->
+                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
+                        <div style="font-size: 1.5rem; color: var(--cyber-glow-pink); margin-top: 0.25rem;"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                                Lecturer Supervision Node
+                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Assign tasks, track students progress, write feedback remarks on the comments timeline, and endorse milestone submissions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Student Terminal -->
+                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
+                        <div style="font-size: 1.5rem; color: #eab308; margin-top: 0.25rem;"><i class="fa-solid fa-user-graduate"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                                Student Workspace Node
+                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Register agreed project titles, manage milestone uploads, submit weekly progress logs, and review supervisor remarks.</p>
+                        </div>
+                    </div>
                 </div>
-                <h3><?= __('landing_student_title') ?></h3>
-                <p><?= __('landing_student_desc') ?></p>
-                <a href="login.php" class="btn btn-primary" style="margin-top: auto;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
             </div>
         </div>
     </section>
 
     <!-- Footer Area -->
-    <footer style="background-color: var(--bg-dark); color: white; padding: 4.5rem 2rem; text-align: center; border-top: 5px solid var(--primary);">
+    <footer style="background-color: #020617; color: white; padding: 4.5rem 2rem; text-align: center; border-top: 4px solid var(--cyber-glow-pink);">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h3 style="font-size: 1.65rem; margin-bottom: 1rem; font-weight: 800;"><?= __('ready_to_start') ?></h3>
-            <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 0.95rem;"><?= __('system_title') ?></p>
-            <div style="font-size: 0.85rem; color: #64748b; line-height: 1.8; font-weight: 500;">
-                <?= __('dept_title') ?><br>
-                <?= __('college_title') ?><br>
-                Oduduwa University Ipetumodu, Osun State, Nigeria
+            <h3 style="font-size: 1.65rem; margin-bottom: 1.5rem; font-weight: 850; letter-spacing: -0.02em;">Department of Computer Science</h3>
+            <div style="font-size: 0.85rem; color: #64748b; line-height: 1.8; font-weight: 600; font-family: monospace;">
+                Ramon Adedoyin College of Natural and Applied Sciences<br>
+                Oduduwa University Ipetumodu, Osun State, Nigeria<br>
+                <span style="color: var(--cyber-glow-pink); display: block; margin-top: 1rem;">[ PORTAL VER: 2.1 - CORE SYNERGY STABLE ]</span>
             </div>
         </div>
     </footer>

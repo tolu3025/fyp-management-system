@@ -1247,3 +1247,297 @@ textarea.form-input {
         padding: 2rem 1.5rem;
     }
 }
+
+/* ==========================================
+   CYBERPUNK HIGH-TECH STYLING OVERLAYS
+   (Scoped to body.cyber-theme)
+   ========================================== */
+
+body.cyber-theme {
+    --cyber-bg: #070a13;
+    --cyber-card: rgba(13, 18, 30, 0.75);
+    --cyber-glow-pink: #d946ef;
+    --cyber-glow-cyan: #06b6d4;
+    --cyber-glow-green: #22c55e;
+    --cyber-border: rgba(255, 255, 255, 0.08);
+    
+    background-color: var(--cyber-bg) !important;
+    color: #e5e7eb !important;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body.cyber-theme .portal-header {
+    background-color: rgba(7, 10, 19, 0.8) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.cyber-theme .portal-header .portal-logo {
+    color: #ffffff !important;
+}
+
+/* Interactive Split-Screen sliding Auth container */
+.auth-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: #070a13;
+    overflow: hidden;
+}
+
+.auth-illustration-pane {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #090d16 url('../images/auth_illustration.jpg') no-repeat center center;
+    background-size: cover;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 2rem;
+}
+
+.auth-illustration-pane::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(7, 10, 19, 0.8) 0%, rgba(30, 64, 175, 0.35) 100%);
+    z-index: 1;
+}
+
+/* When login is active, illustration pane shrinks to 50% on the right */
+.auth-container.login-active .auth-illustration-pane {
+    width: 50%;
+}
+
+.auth-form-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #070a13;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-container.login-active .auth-form-pane {
+    width: 50%;
+    opacity: 1;
+}
+
+/* Glassmorphism Auth Forms & Cards */
+.auth-overlay-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(6, 182, 212, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.auth-overlay-card h2 {
+    font-size: 2rem;
+    font-weight: 850;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.auth-overlay-card .subtitle {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* Glowing Form Inputs */
+body.cyber-theme .form-input {
+    background-color: rgba(3, 7, 18, 0.6) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+body.cyber-theme .form-input:focus {
+    border-color: var(--cyber-glow-cyan) !important;
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2) !important;
+}
+
+/* Glowing Neon Buttons */
+.btn-cyber-primary {
+    background: linear-gradient(135deg, var(--cyber-glow-pink) 0%, #a21caf 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(217, 70, 239, 0.3);
+    font-weight: 800;
+}
+
+.btn-cyber-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(217, 70, 239, 0.5);
+    opacity: 0.95;
+}
+
+.btn-cyber-cyan {
+    background: linear-gradient(135deg, var(--cyber-glow-cyan) 0%, #0891b2 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+    font-weight: 800;
+}
+
+.btn-cyber-cyan:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(6, 182, 212, 0.5);
+    opacity: 0.95;
+}
+
+/* Landing Page Cyber Elements */
+body.cyber-theme .hero-section {
+    background: radial-gradient(circle at top right, rgba(217, 70, 239, 0.1) 0%, rgba(6, 182, 212, 0.06) 50%, rgba(3, 7, 18, 0) 100%) !important;
+    padding: 8rem 2rem !important;
+}
+
+body.cyber-theme .hero-title {
+    font-size: 3.75rem !important;
+    color: #ffffff !important;
+    line-height: 1.1 !important;
+}
+
+.cyber-illustration-container {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--radius-lg);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(217, 70, 239, 0.15);
+    overflow: hidden;
+    animation: floatAnim 6s ease-in-out infinite;
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.cyber-card {
+    background: var(--cyber-card) !important;
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.cyber-card:hover {
+    border-color: rgba(6, 182, 212, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.05) !important;
+    transform: translateY(-4px);
+}
+
+/* Pre-screening role cards selection styles */
+.role-picker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.role-picker-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: #9ca3af;
+}
+
+.role-picker-card:hover {
+    border-color: var(--cyber-glow-cyan);
+    color: #ffffff;
+    background: rgba(6, 182, 212, 0.04);
+}
+
+.role-picker-card.active {
+    border-color: var(--cyber-glow-pink);
+    color: #ffffff;
+    background: rgba(217, 70, 239, 0.06);
+    box-shadow: 0 0 15px rgba(217, 70, 239, 0.15);
+}
+
+.role-picker-card i {
+    font-size: 2rem;
+}
+
+.role-picker-card span {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Slide in container for fields */
+.registration-slide-fields {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive styling for split pane */
+@media (max-width: 992px) {
+    .auth-illustration-pane {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 480px;
+    }
+    .auth-container.login-active .auth-illustration-pane {
+        width: 100% !important;
+    }
+    .auth-form-pane {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        opacity: 1 !important;
+        display: none;
+    }
+    .auth-container.login-active .auth-form-pane {
+        width: 100% !important;
+        display: flex !important;
+    }
+    .auth-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+}
+
