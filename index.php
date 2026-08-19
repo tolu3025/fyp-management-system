@@ -1,7 +1,7 @@
 <?php
 // index.php
-// Redesigned: Cyberpunk High-Tech landing page for Oduduwa University Computer Science FYP Portal.
-// Features glowing neon styling, glassmorphism, stats system diagnostics, and illustration nodes.
+// Redesigned: Clean Light Theme landing page for Oduduwa University Computer Science FYP Portal.
+// Features clean academic styling, solid buttons, system statistics, and visual illustrations.
 
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
@@ -39,9 +39,11 @@ try {
     <title><?= __('system_title') ?></title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="cyber-theme">
+<body class="portal-theme">
     <!-- Public Header -->
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
@@ -59,106 +61,94 @@ try {
                     </select>
                 </form>
             </div>
-            <a href="login.php?mode=login" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: rgba(255,255,255,0.15); background: transparent; color: #ffffff;"><i class="fa-solid fa-right-to-bracket"></i> <?= __('login_button') ?></a>
+            <a href="login.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: var(--border); background: var(--portal-card); color: var(--text-main);"><i class="fa-solid fa-right-to-bracket"></i> Log In</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; text-align: left; padding: 0 1rem;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.25fr 1fr; gap: 4rem; align-items: center; text-align: left; padding: 0 1.5rem;">
             <!-- Left Pane: Hero Details -->
             <div>
-                <span style="font-family: monospace; font-size: 0.9rem; color: var(--cyber-glow-pink); text-transform: uppercase; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.75rem;">[ SYSTEM ACCESS INITIALIZATION ]</span>
-                <h1 class="hero-title"><?= __('landing_hero_title') ?></h1>
-                <p class="hero-desc"><?= __('landing_hero_desc') ?></p>
-                <div class="hero-actions" style="justify-content: flex-start;">
-                    <a href="login.php?mode=login" class="btn btn-cyber-cyan" style="padding: 0.85rem 2rem; font-size: 0.95rem;"><i class="fa-solid fa-right-to-bracket"></i> Connect Terminal</a>
-                    <a href="login.php?mode=register" class="btn btn-cyber-primary" style="padding: 0.85rem 2rem; font-size: 0.95rem;"><i class="fa-solid fa-network-wired"></i> Initialize Node</a>
+                <span style="font-family: monospace; font-size: 0.9rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; display: block; margin-bottom: 0.75rem;">[ COMPUTER SCIENCE DEPARTMENT PORTAL ]</span>
+                <h1 class="hero-title">Final Year Project Management System</h1>
+                <p class="hero-desc">A centralized tracking portal for final year project submissions, task management, and reviews at Oduduwa University Ipetumodu.</p>
+                <div class="hero-actions" style="justify-content: flex-start; gap: 1rem; margin-top: 2rem;">
+                    <a href="login.php" class="btn btn-portal-primary" style="padding: 0.85rem 2.25rem; font-size: 0.95rem; border-radius: 9999px;"><i class="fa-solid fa-right-to-bracket"></i> Log In</a>
+                    <a href="register.php" class="btn btn-portal-secondary" style="padding: 0.85rem 2.25rem; font-size: 0.95rem; border-radius: 9999px;"><i class="fa-solid fa-user-plus"></i> Register Account</a>
                 </div>
             </div>
 
-            <!-- Right Pane: Floating holographic illustration -->
+            <!-- Right Pane: Illustration Frame -->
             <div style="text-align: center;">
-                <div class="cyber-illustration-container">
-                    <img src="assets/images/illustrations1.png" alt="Holographic Interface" style="max-width: 100%; height: auto; display: block;">
+                <div class="portal-illustration-frame">
+                    <img src="assets/images/illustrations1.png" alt="Student Workspace Illustration">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Live System Diagnostics Stats -->
-    <section style="background-color: var(--cyber-gray); border-top: 1px solid var(--cyber-border); border-bottom: 1px solid var(--cyber-border); padding: 4rem 1rem;">
+    <!-- Live System Statistics -->
+    <section style="background-color: var(--portal-bg); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem;">
         <div style="max-width: 1000px; margin: 0 auto;">
-            <span style="font-family: monospace; font-size: 0.8rem; color: var(--cyber-glow-cyan); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; display: block; text-align: center; margin-bottom: 2.5rem;">[ DIAGNOSTICS: ACTIVE SYSTEM METRICS ]</span>
-            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="cyber-card" style="text-align: center;">
-                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">STUDENT NODES</div>
-                    <div style="font-size: 2.75rem; font-weight: 850; color: var(--cyber-glow-pink); letter-spacing: -0.03em;"><?= $student_count ?></div>
-                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ STATUS: ONLINE ]</span>
+            <span style="font-family: monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; display: block; text-align: center; margin-bottom: 2.5rem;">CURRENT PORTAL STATISTICS</span>
+            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                <div class="portal-card" style="text-align: center; background: white;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Registered Students</div>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><?= $student_count ?></div>
                 </div>
-                <div class="cyber-card" style="text-align: center;">
-                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">LECTURER NODES</div>
-                    <div style="font-size: 2.75rem; font-weight: 850; color: var(--cyber-glow-cyan); letter-spacing: -0.03em;"><?= $supervisor_count ?></div>
-                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ STATUS: ONLINE ]</span>
+                <div class="portal-card" style="text-align: center; background: white;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Supervisors (Lecturers)</div>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);"><?= $supervisor_count ?></div>
                 </div>
-                <div class="cyber-card" style="text-align: center;">
-                    <div style="font-size: 0.75rem; font-family: monospace; color: var(--text-muted); font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">ACTIVE PROJECTS</div>
-                    <div style="font-size: 2.75rem; font-weight: 850; color: #eab308; letter-spacing: -0.03em;"><?= $project_count ?></div>
-                    <span style="display: block; font-size: 0.65rem; color: var(--neon-green); font-family: monospace; font-weight: 700; margin-top: 0.5rem;">[ CORE INTEGRITY: STABLE ]</span>
+                <div class="portal-card" style="text-align: center; background: white;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Active Topics</div>
+                    <div style="font-size: 2.5rem; font-weight: 800; color: #10b981;"><?= $project_count ?></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Node Gateways Section (replacing plain role cards) -->
-    <section style="padding: 6rem 1rem; background-color: var(--cyber-dark);">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; padding: 0 1rem;">
-            <!-- Left Pane: Illustration -->
+    <!-- Portal Modules Gateways -->
+    <section style="padding: 6.5rem 1.5rem; background-color: white;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.25fr; gap: 4.5rem; align-items: center;">
+            <!-- Left Pane: Illustration Frame -->
             <div style="text-align: center;">
-                <div class="cyber-illustration-container" style="box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(6, 182, 212, 0.15);">
-                    <img src="assets/images/illustrations2.png" alt="Console Interface Control" style="max-width: 100%; height: auto; display: block;">
+                <div class="portal-illustration-frame">
+                    <img src="assets/images/illustrations2.png" alt="Supervisor Management Illustration">
                 </div>
             </div>
 
-            <!-- Right Pane: High-Tech Node Terminals -->
+            <!-- Right Pane: Modules Grid -->
             <div>
-                <span style="font-family: monospace; font-size: 0.8rem; color: var(--cyber-glow-pink); text-transform: uppercase; font-weight: 800; letter-spacing: 2px; display: block; margin-bottom: 0.75rem;">[ GATEWAY CONTROL ACCESS NODES ]</span>
-                <h2 style="font-size: 2.25rem; font-weight: 850; color: #ffffff; margin-bottom: 2rem; letter-spacing: -0.02em;">Tailored Portal Modules</h2>
+                <span style="font-family: monospace; font-size: 0.85rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 0.75rem;">PORTAL GATEWAY MODULES</span>
+                <h2 style="font-size: 2.25rem; font-weight: 850; color: var(--text-main); margin-bottom: 2rem; letter-spacing: -0.02em;">Department Supervision Roles</h2>
 
                 <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <!-- HOD Terminal -->
-                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
-                        <div style="font-size: 1.5rem; color: var(--cyber-glow-cyan); margin-top: 0.25rem;"><i class="fa-solid fa-user-tie"></i></div>
+                    <!-- HOD Module -->
+                    <div class="portal-card" style="display: flex; align-items: flex-start; gap: 1.5rem; background: var(--portal-bg);">
+                        <div style="font-size: 1.75rem; color: var(--primary); margin-top: 0.15rem;"><i class="fa-solid fa-user-tie"></i></div>
                         <div>
-                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                                HOD Administrative Terminal
-                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
-                            </h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Allocate supervisors, configure departmental milestones, and audit system compliance reports.</p>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem;">HOD Administrative Module</h4>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">Configure submission milestones, allocate supervisor loads, and manage the student registry logs.</p>
                         </div>
                     </div>
 
-                    <!-- Supervisor Terminal -->
-                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
-                        <div style="font-size: 1.5rem; color: var(--cyber-glow-pink); margin-top: 0.25rem;"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <!-- Supervisor Module -->
+                    <div class="portal-card" style="display: flex; align-items: flex-start; gap: 1.5rem; background: var(--portal-bg);">
+                        <div style="font-size: 1.75rem; color: var(--secondary); margin-top: 0.15rem;"><i class="fa-solid fa-chalkboard-user"></i></div>
                         <div>
-                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                                Lecturer Supervision Node
-                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
-                            </h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Assign tasks, track students progress, write feedback remarks on the comments timeline, and endorse milestone submissions.</p>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem;">Lecturer Supervision Module</h4>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">Assign tasks, track progress logs, endorse deliverables, and participate in feedback discussion timelines.</p>
                         </div>
                     </div>
 
-                    <!-- Student Terminal -->
-                    <div class="cyber-card" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.75rem 2rem;">
-                        <div style="font-size: 1.5rem; color: #eab308; margin-top: 0.25rem;"><i class="fa-solid fa-user-graduate"></i></div>
+                    <!-- Student Module -->
+                    <div class="portal-card" style="display: flex; align-items: flex-start; gap: 1.5rem; background: var(--portal-bg);">
+                        <div style="font-size: 1.75rem; color: #10b981; margin-top: 0.15rem;"><i class="fa-solid fa-user-graduate"></i></div>
                         <div>
-                            <h4 style="font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                                Student Workspace Node
-                                <span style="font-size: 0.65rem; font-family: monospace; padding: 0.15rem 0.4rem; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); border-radius: 4px; color: var(--neon-green); font-weight: 700;">[READY]</span>
-                            </h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Register agreed project titles, manage milestone uploads, submit weekly progress logs, and review supervisor remarks.</p>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.35rem;">Student Workspace Module</h4>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">Register project topics, upload milestone deliverables, view evaluation status, and check remarks timelines.</p>
                         </div>
                     </div>
                 </div>
@@ -167,13 +157,13 @@ try {
     </section>
 
     <!-- Footer Area -->
-    <footer style="background-color: #020617; color: white; padding: 4.5rem 2rem; text-align: center; border-top: 4px solid var(--cyber-glow-pink);">
+    <footer style="background-color: var(--portal-bg); color: var(--text-main); padding: 4.5rem 1.5rem; text-align: center; border-top: 1px solid var(--border);">
         <div style="max-width: 800px; margin: 0 auto;">
-            <h3 style="font-size: 1.65rem; margin-bottom: 1.5rem; font-weight: 850; letter-spacing: -0.02em;">Department of Computer Science</h3>
-            <div style="font-size: 0.85rem; color: #64748b; line-height: 1.8; font-weight: 600; font-family: monospace;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.25rem; font-weight: 800; color: var(--primary); letter-spacing: -0.01em;">Department of Computer Science</h3>
+            <div style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; font-weight: 500;">
                 Ramon Adedoyin College of Natural and Applied Sciences<br>
                 Oduduwa University Ipetumodu, Osun State, Nigeria<br>
-                <span style="color: var(--cyber-glow-pink); display: block; margin-top: 1rem;">[ PORTAL VER: 2.1 - CORE SYNERGY STABLE ]</span>
+                <span style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 1rem; font-family: monospace;">[ Portal Version 2.2 ]</span>
             </div>
         </div>
     </footer>
