@@ -1,7 +1,7 @@
 <?php
 // register.php
 // Clean Light Theme registration page.
-// Features a full-picture welcome visual, straightforward pre-screening, and academic forms.
+// Features a full-screen background cover, centered action button, and academic forms.
 
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
@@ -98,119 +98,103 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="portal-theme">
-    <!-- Public Header -->
-    <header class="portal-header">
-        <a href="index.php" class="portal-logo" style="text-decoration: none;">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>CS FYP Portal</span>
-        </a>
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-            <!-- Language Selector Dropdown -->
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fa-solid fa-globe" style="color: var(--text-muted); font-size: 0.9rem;"></i>
-                <form method="GET" action="" style="margin: 0; display: flex; align-items: center;">
-                    <select name="lang" onchange="this.form.submit()" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; width: auto;">
-                        <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>EN</option>
-                        <option value="ms" <?= ($_SESSION['lang'] ?? 'en') === 'ms' ? 'selected' : '' ?>>MS</option>
-                    </select>
-                </form>
-            </div>
-            <a href="index.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: var(--border); background: var(--portal-card); color: var(--text-main);"><i class="fa-solid fa-house"></i> Home</a>
-        </div>
-    </header>
+<body class="portal-theme register-cover-page">
+    <!-- Transparent absolute home link -->
+    <div style="position: absolute; top: 1.5rem; right: 2rem; z-index: 10;">
+        <a href="index.php" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);"><i class="fa-solid fa-house"></i> Home</a>
+    </div>
 
     <div class="register-cover-container">
-        <!-- 1. Full visual image frame -->
-        <div class="register-visual-frame" id="visualFrame">
-            <img src="assets/images/auth_illustration.jpg" alt="Academic Workspace Illustration">
-        </div>
-
-        <!-- Success Alert (Centered layout style) -->
+        <!-- Success Alert (Centered card layout) -->
         <?php if (!empty($register_success)): ?>
-            <div class="auth-card" style="margin: 0 auto 3rem auto; text-align: center;">
+            <div class="auth-card" style="text-align: center; max-width: 440px;">
                 <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i></div>
                 <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem; font-weight: 800;">Account Created Successfully!</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Your supervision registry credentials have been registered.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Your registration has been completed.</p>
                 <a href="login.php" class="btn btn-portal-primary" style="padding: 0.75rem 2rem;"><i class="fa-solid fa-right-to-bracket"></i> Proceed to Login</a>
             </div>
         <?php else: ?>
-            <!-- 2. Buttons beneath (No card container initially) -->
-            <div id="registerActions" style="margin-bottom: 3rem;">
-                <button type="button" id="startRegisterBtn" class="btn btn-portal-primary" style="padding: 0.9rem 3.5rem; font-size: 1.05rem; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);"><i class="fa-solid fa-user-plus"></i> Register Account</button>
-                <div style="margin-top: 1.25rem;">
-                    <a href="login.php" style="color: var(--text-muted); text-decoration: none; font-weight: 700; font-size: 0.95rem;">Already have an account? Log In</a>
+            <!-- 1. Centered welcome buttons (No card container initially) -->
+            <div id="registerActions">
+                <button type="button" id="startRegisterBtn" class="btn btn-register-start"><i class="fa-solid fa-user-plus"></i> Register Account</button>
+                <div style="margin-top: 1.5rem;">
+                    <a href="login.php" class="register-login-link">Already have an account? Log In</a>
                 </div>
             </div>
 
-            <!-- 3. Dynamic Registration Fields Form (fades in upon clicking) -->
-            <div id="registrationFormFields" style="display: none; max-width: 500px; margin: 0 auto;">
-                <?php if (!empty($register_error)): ?>
-                    <div class="alert alert-danger" style="text-align: left; margin-bottom: 1.5rem;"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($register_error) ?></div>
-                <?php endif; ?>
+            <!-- 2. Dynamic Registration Form (loads inside card overlay once clicked) -->
+            <div id="registrationFormFields" style="display: none; width: 100%;">
+                <div class="auth-card" style="text-align: left; max-width: 460px; margin: 0 auto;">
+                    <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem;">Create Account</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Select role and input credentials</p>
 
-                <form action="register.php" method="POST" autocomplete="off" id="regForm">
-                    <input type="hidden" name="role" id="roleInput" value="">
+                    <?php if (!empty($register_error)): ?>
+                        <div class="alert alert-danger" style="text-align: left; margin-bottom: 1.5rem;"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($register_error) ?></div>
+                    <?php endif; ?>
 
-                    <!-- Pre-screening cards picker -->
-                    <div class="role-picker-grid" id="rolePicker">
-                        <div class="role-picker-card" data-role="Student" onclick="selectRole('Student')">
-                            <i class="fa-solid fa-user-graduate"></i>
-                            <span>Student Account</span>
-                        </div>
-                        <div class="role-picker-card" data-role="Supervisor" onclick="selectRole('Supervisor')">
-                            <i class="fa-solid fa-chalkboard-user"></i>
-                            <span>Supervisor Account</span>
-                        </div>
-                    </div>
+                    <form action="register.php" method="POST" autocomplete="off" id="regForm">
+                        <input type="hidden" name="role" id="roleInput" value="">
 
-                    <!-- Dynamic fields container -->
-                    <div class="registration-slide-fields" id="regDynamicFields">
-                        <!-- Student details -->
-                        <div id="studentFieldsBlock" style="display: none;">
-                            <div class="form-group">
-                                <label for="No_matrik" class="form-label"><?= __('matric_no') ?></label>
-                                <input type="text" name="No_matrik" id="No_matrik" class="form-input" placeholder="CSC/2022/001">
+                        <!-- Pre-screening cards picker -->
+                        <div class="role-picker-grid" id="rolePicker">
+                            <div class="role-picker-card" data-role="Student" onclick="selectRole('Student')" style="margin: 0;">
+                                <i class="fa-solid fa-user-graduate"></i>
+                                <span>Student</span>
                             </div>
-                            <div class="form-group">
-                                <label for="Semester" class="form-label"><?= __('semester') ?></label>
-                                <input type="number" name="Semester" id="Semester" class="form-input" value="8" min="1" max="12">
+                            <div class="role-picker-card" data-role="Supervisor" onclick="selectRole('Supervisor')" style="margin: 0;">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                                <span>Supervisor</span>
                             </div>
                         </div>
 
-                        <!-- Supervisor details -->
-                        <div id="supervisorFieldsBlock" style="display: none;">
+                        <!-- Dynamic fields container -->
+                        <div class="registration-slide-fields" id="regDynamicFields" style="padding: 0; border: none; box-shadow: none; margin-bottom: 0;">
+                            <!-- Student details -->
+                            <div id="studentFieldsBlock" style="display: none;">
+                                <div class="form-group">
+                                    <label for="No_matrik" class="form-label"><?= __('matric_no') ?></label>
+                                    <input type="text" name="No_matrik" id="No_matrik" class="form-input" placeholder="CSC/2022/001">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Semester" class="form-label"><?= __('semester') ?></label>
+                                    <input type="number" name="Semester" id="Semester" class="form-input" value="8" min="1" max="12">
+                                </div>
+                            </div>
+
+                            <!-- Supervisor details -->
+                            <div id="supervisorFieldsBlock" style="display: none;">
+                                <div class="form-group">
+                                    <label for="No_staf" class="form-label">Lecturer Username</label>
+                                    <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="e.g. dralabi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Jawatan" class="form-label"><?= __('designation') ?></label>
+                                    <input type="text" name="Jawatan" id="Jawatan" class="form-input" placeholder="e.g. Senior Lecturer">
+                                </div>
+                            </div>
+
+                            <!-- Common inputs -->
                             <div class="form-group">
-                                <label for="No_staf" class="form-label">Lecturer Username</label>
-                                <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="e.g. dralabi">
+                                <label for="Nama" class="form-label"><?= __('full_name') ?></label>
+                                <input type="text" name="Nama" id="Nama" class="form-input" placeholder="e.g. Adekunle Tobi" required>
                             </div>
                             <div class="form-group">
-                                <label for="Jawatan" class="form-label"><?= __('designation') ?></label>
-                                <input type="text" name="Jawatan" id="Jawatan" class="form-input" placeholder="e.g. Senior Lecturer">
+                                <label for="Email" class="form-label"><?= __('email') ?></label>
+                                <input type="email" name="Email" id="Email" class="form-input" placeholder="e.g. user@oduduwa.edu.ng" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Katalaluan" class="form-label"><?= __('password') ?></label>
+                                <input type="password" name="Katalaluan" id="Katalaluan" class="form-input" placeholder="••••••••" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-portal-primary btn-block" style="margin-top: 1.5rem; padding: 0.75rem;"><i class="fa-solid fa-user-plus"></i> Submit Registration</button>
+                            
+                            <div style="margin-top: 1.5rem; text-align: center;">
+                                <a href="register.php" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-chevron-left"></i> Cancel and Go Back</a>
                             </div>
                         </div>
-
-                        <!-- Common inputs -->
-                        <div class="form-group">
-                            <label for="Nama" class="form-label"><?= __('full_name') ?></label>
-                            <input type="text" name="Nama" id="Nama" class="form-input" placeholder="e.g. Adekunle Tobi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email" class="form-label"><?= __('email') ?></label>
-                            <input type="email" name="Email" id="Email" class="form-input" placeholder="e.g. user@oduduwa.edu.ng" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="Katalaluan" class="form-label"><?= __('password') ?></label>
-                            <input type="password" name="Katalaluan" id="Katalaluan" class="form-input" placeholder="••••••••" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-portal-primary btn-block" style="margin-top: 1.5rem; padding: 0.75rem;"><i class="fa-solid fa-user-plus"></i> Submit Registration</button>
-                        
-                        <div style="margin-top: 1.5rem; text-align: center;">
-                            <a href="register.php" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-chevron-left"></i> Cancel and Go Back</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         <?php endif; ?>
     </div>
@@ -221,9 +205,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             startRegBtn.addEventListener('click', () => {
                 document.getElementById('registerActions').style.display = 'none';
                 document.getElementById('registrationFormFields').style.display = 'block';
-                // Slide image down slightly to make room
-                document.getElementById('visualFrame').style.maxWidth = '650px';
-                document.getElementById('visualFrame').style.transition = 'max-width 0.4s ease';
             });
         }
 
@@ -272,7 +253,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('registerActions').style.display = 'none';
             document.getElementById('registrationFormFields').style.display = 'block';
-            document.getElementById('visualFrame').style.maxWidth = '650px';
         });
         <?php endif; ?>
     </script>

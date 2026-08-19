@@ -1399,27 +1399,80 @@ body.portal-theme .form-input:focus {
     transform: translateY(-1px);
 }
 
-/* Registration Page Layout (Full image visual with button beneath) */
+/* Registration Page Layout (Full screen background image layout) */
+body.register-cover-page {
+    background: #5c59f2 url('../images/auth_illustration.jpg') no-repeat center center !important;
+    background-size: cover !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: 'Inter', sans-serif !important;
+}
+
+body.register-cover-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(92, 89, 242, 0.25); /* Blend overlay */
+    z-index: 1;
+}
+
 .register-cover-container {
-    max-width: 800px;
-    margin: 3rem auto;
-    padding: 0 1.5rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-.register-visual-frame {
-    width: 100%;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    margin-bottom: 2.5rem;
-    border: 1px solid var(--border);
+/* Custom rounded white register button matching purple theme */
+.btn-register-start {
+    background-color: #ffffff !important;
+    color: #5c59f2 !important;
+    padding: 1.1rem 3.5rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    border-radius: 9999px !important;
+    border: none !important;
+    box-shadow: 0 10px 25px rgba(92, 89, 242, 0.4) !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.register-visual-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
+.btn-register-start:hover {
+    background-color: #fef08a !important; /* Soft yellow hover matching jacket */
+    color: #1e3a8a !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 30px rgba(92, 89, 242, 0.6) !important;
+}
+
+.register-login-link {
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: var(--transition);
+}
+
+.register-login-link:hover {
+    color: #fef08a !important; /* Yellow hover */
 }
 
 /* Pre-screening role cards selection styles */
@@ -1501,10 +1554,6 @@ body.portal-theme .hero-title {
 
 .portal-illustration-frame {
     width: 100%;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    box-shadow: var(--shadow);
 }
 
 .portal-illustration-frame img {
