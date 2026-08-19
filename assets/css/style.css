@@ -1593,4 +1593,103 @@ body.portal-theme .hero-title {
     }
 }
 
+/* ==========================================
+   WIZARD STEPPER ONBOARDING SYSTEM
+   ========================================== */
+
+.wizard-progress-container {
+    width: 100%;
+    background-color: #f1f5f9;
+    height: 6px;
+    border-radius: 9999px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.wizard-progress-bar {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%; /* Set dynamically */
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wizard-step-indicator {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step.active {
+    display: block;
+    animation: wizardFade 0.4s ease-out forwards;
+}
+
+@keyframes wizardFade {
+    from { opacity: 0; transform: translateX(15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+/* Additional responsive breakpoints for mobile grid collapse */
+@media (max-width: 992px) {
+    body.portal-theme .hero-section > div {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+        text-align: center !important;
+    }
+    body.portal-theme .hero-actions {
+        justify-content: center !important;
+    }
+    body.portal-theme .hero-title {
+        font-size: 2.75rem !important;
+    }
+    body.portal-theme section:nth-of-type(3) > div {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body.portal-theme .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+    body.portal-theme .hero-section {
+        padding: 5rem 1.5rem !important;
+    }
+    body.portal-theme .hero-title {
+        font-size: 2.15rem !important;
+    }
+    body.portal-theme .hero-desc {
+        font-size: 0.95rem !important;
+    }
+    .register-cover-container {
+        padding: 1rem !important;
+    }
+    .auth-card {
+        padding: 2.25rem 1.5rem !important;
+        max-width: 95vw !important;
+    }
+    .role-picker-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+}
+
+
 
