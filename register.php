@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // register.php
 // Clean Light Theme registration page.
 // Features a full-screen background cover, centered multi-step wizard, and self-healing DB columns.
@@ -112,385 +112,594 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= __('system_title') ?></title>
+    <title>Create Account | <?= __('system_title') ?></title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* ── Registration Split-Panel Layout ── */
+        body.reg-page {
+            min-height: 100vh;
+            display: flex;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            margin: 0;
+        }
+
+        /* Left branding panel */
+        .reg-brand-panel {
+            width: 380px;
+            flex-shrink: 0;
+            background: linear-gradient(160deg, #0f1729 0%, #1e3a8a 55%, #1e40af 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reg-brand-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+        }
+
+        .reg-brand-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(180, 83, 9, 0.15);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .reg-brand-top { position: relative; z-index: 1; }
+
+        .reg-brand-crest {
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            color: #fbbf24;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .reg-brand-univ {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.4rem;
+        }
+
+        .reg-brand-dept {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .reg-brand-divider {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, rgba(251,191,36,0.2));
+            border-radius: 9999px;
+            margin: 1rem 0 1.25rem;
+        }
+
+        .reg-brand-desc {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        .reg-brand-features {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 2rem;
+        }
+
+        .reg-brand-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .reg-brand-feature i {
+            color: #fbbf24;
+            width: 16px;
+            text-align: center;
+        }
+
+        .reg-brand-bottom {
+            position: relative;
+            z-index: 1;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.3);
+            font-weight: 500;
+        }
+
+        /* Right form panel */
+        .reg-form-panel {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 3rem 2rem;
+        }
+
+        .reg-form-inner {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .reg-form-header {
+            margin-bottom: 2rem;
+        }
+
+        .reg-form-header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
+        }
+
+        .reg-form-header p {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        /* Role Tab Switcher */
+        .reg-role-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            background: #f1f5f9;
+            padding: 0.35rem;
+            border-radius: 12px;
+        }
+
+        .reg-role-tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1rem;
+            border-radius: 9px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            color: #64748b;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+        }
+
+        .reg-role-tab:hover {
+            color: #1e3a8a;
+        }
+
+        .reg-role-tab.active {
+            background: white;
+            color: #1e3a8a;
+            box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+        }
+
+        .reg-role-tab i { font-size: 1rem; }
+
+        /* Field sections */
+        .reg-section {
+            margin-bottom: 1.75rem;
+        }
+
+        .reg-section-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #94a3b8;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .reg-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .reg-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .reg-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .reg-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 9px;
+            background: #fff;
+            color: #0f172a;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .reg-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30,58,138,0.1);
+        }
+
+        .reg-input::placeholder { color: #94a3b8; }
+
+        .reg-submit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .reg-login-link {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .reg-login-link a {
+            color: #1e3a8a;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .reg-login-link a:hover { text-decoration: underline; }
+
+        .btn-reg-submit {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 0.85rem 2.5rem;
+            font-size: 0.92rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(30,58,138,0.25);
+        }
+
+        .btn-reg-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30,58,138,0.35);
+        }
+
+        /* Home link top-right */
+        .reg-home-link {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 20;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: white;
+            padding: 0.5rem 0.9rem;
+            border-radius: 9999px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .reg-home-link:hover {
+            color: #1e3a8a;
+            border-color: #1e3a8a;
+        }
+
+        /* Role-specific panels */
+        .role-panel { display: none; }
+        .role-panel.active { display: block; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .reg-brand-panel { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .reg-grid-2 { grid-template-columns: 1fr; }
+            .reg-form-panel { padding: 2rem 1rem; }
+        }
+    </style>
 </head>
-<body class="portal-theme register-cover-page">
-    <!-- Transparent absolute home link -->
-    <div style="position: absolute; top: 1.5rem; right: 2rem; z-index: 10;">
-        <a href="index.php" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5);"><i class="fa-solid fa-house"></i> Home</a>
-    </div>
+<body class="reg-page">
+    <a href="index.php" class="reg-home-link"><i class="fa-solid fa-house"></i> Home</a>
 
-    <div class="register-cover-container">
-        <!-- Success Alert (Centered card layout) -->
-        <?php if (!empty($register_success)): ?>
-            <div class="auth-card" style="text-align: center; max-width: 440px;">
-                <div style="font-size: 3rem; color: #10b981; margin-bottom: 1rem;"><i class="fa-solid fa-circle-check"></i></div>
-                <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem; font-weight: 800;">Account Created Successfully!</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Your registration has been completed.</p>
-                <a href="login.php" class="btn btn-portal-primary" style="padding: 0.75rem 2rem;"><i class="fa-solid fa-right-to-bracket"></i> Proceed to Login</a>
+    <?php if (!empty($register_success)): ?>
+        <!-- Success screen -->
+        <div style="width:100%; display:flex; align-items:center; justify-content:center; min-height:100vh; background:#f8fafc;">
+            <div style="text-align:center; max-width:420px; padding:3rem 2rem; background:white; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.08); border:1px solid #e2e8f0;">
+                <div style="font-size:3.5rem; color:#059669; margin-bottom:1.25rem;"><i class="fa-solid fa-circle-check"></i></div>
+                <h2 style="font-size:1.35rem; font-weight:800; color:#0f172a; margin-bottom:0.5rem;">Account Created Successfully!</h2>
+                <p style="color:#64748b; font-size:0.9rem; margin-bottom:2rem;">Your registration has been completed. You can now log in to access the portal.</p>
+                <a href="login.php" style="display:inline-flex; align-items:center; gap:0.6rem; background:linear-gradient(135deg,#1e3a8a,#1e40af); color:white; padding:0.85rem 2rem; border-radius:9px; text-decoration:none; font-weight:700; font-size:0.9rem; box-shadow:0 4px 12px rgba(30,58,138,0.25);">
+                    <i class="fa-solid fa-right-to-bracket"></i> Proceed to Login
+                </a>
             </div>
-        <?php else: ?>
-            <!-- 1. Centered welcome buttons (No card container initially) -->
-            <div id="registerActions">
-                <button type="button" id="startRegisterBtn" class="btn btn-register-start"><i class="fa-solid fa-user-plus"></i> Register Account</button>
-                <div style="margin-top: 1.5rem;">
-                    <a href="login.php" class="register-login-link">Already have an account? Log In</a>
+        </div>
+    <?php else: ?>
+
+    <!-- Left Branding Panel -->
+    <aside class="reg-brand-panel">
+        <div class="reg-brand-top">
+            <div class="reg-brand-crest"><i class="fa-solid fa-graduation-cap"></i></div>
+            <p class="reg-brand-univ">Oduduwa University · Ipetumodu</p>
+            <h2 class="reg-brand-dept">Department of<br>Computer Science</h2>
+            <div class="reg-brand-divider"></div>
+            <p class="reg-brand-desc">Register to access the Final Year Project portal for CS students, supervisors, and department administration.</p>
+            <div class="reg-brand-features">
+                <div class="reg-brand-feature"><i class="fa-solid fa-file-circle-check"></i> Submit FYP deliverables</div>
+                <div class="reg-brand-feature"><i class="fa-solid fa-comments"></i> Supervisor feedback</div>
+                <div class="reg-brand-feature"><i class="fa-solid fa-chart-line"></i> Track project milestones</div>
+                <div class="reg-brand-feature"><i class="fa-solid fa-bell"></i> Real-time notifications</div>
+            </div>
+        </div>
+        <div class="reg-brand-bottom">
+            &copy; <?= date('Y') ?> Department of Computer Science, OUI
+        </div>
+    </aside>
+
+    <!-- Right Form Panel -->
+    <main class="reg-form-panel">
+        <div class="reg-form-inner">
+
+            <div class="reg-form-header">
+                <h1>Create an Account</h1>
+                <p>Fill in your details below to register for the OUI CS FYP Portal.</p>
+            </div>
+
+            <?php if (!empty($register_error)): ?>
+                <div style="background:#fef2f2; border:1px solid rgba(220,38,38,0.2); border-left:4px solid #dc2626; border-radius:9px; padding:1rem 1.25rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem; font-size:0.88rem; font-weight:600; color:#dc2626;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($register_error) ?>
                 </div>
+            <?php endif; ?>
+
+            <!-- Role Tabs -->
+            <div class="reg-role-tabs" role="tablist">
+                <button type="button" class="reg-role-tab active" id="tab-student" onclick="switchRole('Student')" aria-selected="true">
+                    <i class="fa-solid fa-user-graduate"></i> Student
+                </button>
+                <button type="button" class="reg-role-tab" id="tab-supervisor" onclick="switchRole('Supervisor')" aria-selected="false">
+                    <i class="fa-solid fa-chalkboard-user"></i> Supervisor (Lecturer)
+                </button>
             </div>
 
-            <!-- 2. Dynamic Multi-Step Registration Stepper Form Card -->
-            <div id="registrationFormFields" style="display: none; width: 100%;">
-                <div class="auth-card glass-card" style="text-align: left; max-width: 465px; margin: 0 auto;">
-                    
-                    <!-- Progress bar stepper indicator -->
-                    <span class="wizard-step-indicator" id="stepIndicator">Step 1 of 7</span>
-                    <div class="wizard-progress-container">
-                        <div class="wizard-progress-bar" id="progressBar"></div>
+            <!-- ── STUDENT FORM ── -->
+            <div id="panel-Student" class="role-panel active">
+                <form action="register.php" method="POST" autocomplete="off" id="studentForm" onsubmit="return validateStudentForm()">
+                    <input type="hidden" name="role" value="Student">
+
+                    <div class="reg-section">
+                        <div class="reg-section-title">Personal Information</div>
+                        <div class="reg-grid-2">
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_Nama">Full Name <span style="color:#dc2626;">*</span></label>
+                                <input type="text" name="Nama" id="s_Nama" class="reg-input" placeholder="e.g. Adekunle Tobi" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Student') ? sanitize($_POST['Nama'] ?? '') : '' ?>">
+                            </div>
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_Email">Email Address <span style="color:#dc2626;">*</span></label>
+                                <input type="email" name="Email" id="s_Email" class="reg-input" placeholder="e.g. student@oduduwa.edu.ng" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Student') ? sanitize($_POST['Email'] ?? '') : '' ?>">
+                            </div>
+                        </div>
+                        <div class="reg-grid-2">
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_Phone">Phone Number</label>
+                                <input type="text" name="Phone" id="s_Phone" class="reg-input" placeholder="e.g. +234 812 345 6789" value="<?= (isset($_POST['role']) && $_POST['role'] === 'Student') ? sanitize($_POST['Phone'] ?? '') : '' ?>">
+                            </div>
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_Specialization">Area of Specialization</label>
+                                <select name="Specialization" id="s_Specialization" class="reg-input">
+                                    <option value="">-- Select --</option>
+                                    <option value="General Computer Science" <?= (isset($_POST['role']) && $_POST['role'] === 'Student' && ($_POST['Specialization'] ?? '') === 'General Computer Science') ? 'selected' : '' ?>>General Computer Science</option>
+                                    <option value="Software Engineering" <?= (isset($_POST['role']) && $_POST['role'] === 'Student' && ($_POST['Specialization'] ?? '') === 'Software Engineering') ? 'selected' : '' ?>>Software Engineering</option>
+                                    <option value="Information Technology" <?= (isset($_POST['role']) && $_POST['role'] === 'Student' && ($_POST['Specialization'] ?? '') === 'Information Technology') ? 'selected' : '' ?>>Information Technology</option>
+                                    <option value="Cybersecurity" <?= (isset($_POST['role']) && $_POST['role'] === 'Student' && ($_POST['Specialization'] ?? '') === 'Cybersecurity') ? 'selected' : '' ?>>Cybersecurity</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <?php if (!empty($register_error)): ?>
-                        <div class="alert alert-danger" style="text-align: left; margin-bottom: 1.5rem;" id="serverErrorAlert"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($register_error) ?></div>
-                    <?php endif; ?>
-
-                    <form action="register.php" method="POST" autocomplete="off" id="regForm">
-                        <input type="hidden" name="role" id="roleInput" value="">
-
-                        <!-- Step 0: Pre-screening role cards picker -->
-                        <div class="wizard-step active" id="step0">
-                            <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem;">Account Type</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Select your account type to continue with registration</p>
-                            <div class="role-picker-grid" id="rolePicker" style="margin: 0;">
-                                <div class="role-picker-card" data-role="Student" onclick="selectRole('Student')" style="margin: 0;">
-                                    <i class="fa-solid fa-user-graduate"></i>
-                                    <span>Student Account</span>
-                                </div>
-                                <div class="role-picker-card" data-role="Supervisor" onclick="selectRole('Supervisor')" style="margin: 0;">
-                                    <i class="fa-solid fa-chalkboard-user"></i>
-                                    <span>Supervisor Account</span>
-                                </div>
+                    <div class="reg-section">
+                        <div class="reg-section-title">Academic Details</div>
+                        <div class="reg-grid-2">
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_No_matrik">Matric Number <span style="color:#dc2626;">*</span></label>
+                                <input type="text" name="No_matrik" id="s_No_matrik" class="reg-input" placeholder="e.g. CSC/2022/001" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Student') ? sanitize($_POST['No_matrik'] ?? '') : '' ?>">
+                            </div>
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="s_Semester">Current Semester <span style="color:#dc2626;">*</span></label>
+                                <input type="number" name="Semester" id="s_Semester" class="reg-input" min="1" max="12" value="<?= (isset($_POST['role']) && $_POST['role'] === 'Student') ? intval($_POST['Semester'] ?? 8) : 8 ?>" required>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Step 1: Full Name -->
-                        <div class="wizard-step" id="step1">
-                            <div class="form-group">
-                                <label for="Nama" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Full Name</label>
-                                <input type="text" name="Nama" id="Nama" class="form-input" placeholder="e.g. Adekunle Tobi" value="<?= isset($_POST['Nama']) ? sanitize($_POST['Nama']) : '' ?>">
-                                <span class="error-msg" id="nameError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter your full name.</span>
-                            </div>
+                    <div class="reg-section">
+                        <div class="reg-section-title">Account Security</div>
+                        <div class="reg-form-group">
+                            <label class="reg-label" for="s_Katalaluan">Password <span style="color:#dc2626;">*</span></label>
+                            <input type="password" name="Katalaluan" id="s_Katalaluan" class="reg-input" placeholder="Minimum 6 characters" required>
+                            <span id="s_pwError" style="display:none; color:#dc2626; font-size:0.78rem; margin-top:0.25rem;">Password must be at least 6 characters.</span>
                         </div>
+                    </div>
 
-                        <!-- Step 2: Email Address -->
-                        <div class="wizard-step" id="step2">
-                            <div class="form-group">
-                                <label for="Email" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Email Address</label>
-                                <input type="email" name="Email" id="Email" class="form-input" placeholder="e.g. user@oduduwa.edu.ng" value="<?= isset($_POST['Email']) ? sanitize($_POST['Email']) : '' ?>">
-                                <span class="error-msg" id="emailError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a valid email address.</span>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Phone Number -->
-                        <div class="wizard-step" id="step3">
-                            <div class="form-group">
-                                <label for="Phone" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Phone Number</label>
-                                <input type="text" name="Phone" id="Phone" class="form-input" placeholder="e.g. +234 812 345 6789" value="<?= isset($_POST['Phone']) ? sanitize($_POST['Phone']) : '' ?>">
-                                <span class="error-msg" id="phoneError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a phone number.</span>
-                            </div>
-                        </div>
-
-                        <!-- Step 4: Specialization / Program Option -->
-                        <div class="wizard-step" id="step4">
-                            <div class="form-group">
-                                <label for="Specialization" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Area of Specialization</label>
-                                <select name="Specialization" id="Specialization" class="form-input">
-                                    <option value="">-- Choose Option --</option>
-                                    <option value="General Computer Science" <?= (isset($_POST['Specialization']) && $_POST['Specialization'] === 'General Computer Science') ? 'selected' : '' ?>>General Computer Science</option>
-                                    <option value="Software Engineering" <?= (isset($_POST['Specialization']) && $_POST['Specialization'] === 'Software Engineering') ? 'selected' : '' ?>>Software Engineering</option>
-                                    <option value="Information Technology" <?= (isset($_POST['Specialization']) && $_POST['Specialization'] === 'Information Technology') ? 'selected' : '' ?>>Information Technology</option>
-                                    <option value="Cybersecurity" <?= (isset($_POST['Specialization']) && $_POST['Specialization'] === 'Cybersecurity') ? 'selected' : '' ?>>Cybersecurity</option>
-                                </select>
-                                <span class="error-msg" id="specError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please select an option.</span>
-                            </div>
-                        </div>
-
-                        <!-- Step 5 (Role specific): Student Matric Number OR Supervisor Lecturer Username -->
-                        <div class="wizard-step" id="step5">
-                            <!-- Student block -->
-                            <div id="studentFieldsStep5" style="display: none;">
-                                <div class="form-group">
-                                    <label for="No_matrik" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Matric Number</label>
-                                    <input type="text" name="No_matrik" id="No_matrik" class="form-input" placeholder="e.g. CSC/2022/001" value="<?= isset($_POST['No_matrik']) ? sanitize($_POST['No_matrik']) : '' ?>">
-                                    <span class="error-msg" id="matricError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter your matric number.</span>
-                                </div>
-                            </div>
-                            <!-- Supervisor block -->
-                            <div id="supervisorFieldsStep5" style="display: none;">
-                                <div class="form-group">
-                                    <label for="No_staf" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Lecturer Username</label>
-                                    <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="e.g. dralabi" value="<?= isset($_POST['No_staf']) ? sanitize($_POST['No_staf']) : '' ?>">
-                                    <span class="error-msg" id="staffError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a lecturer username.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 6 (Role specific): Student Semester OR Supervisor Designation -->
-                        <div class="wizard-step" id="step6">
-                            <!-- Student block -->
-                            <div id="studentFieldsStep6" style="display: none;">
-                                <div class="form-group">
-                                    <label for="Semester" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Current Semester</label>
-                                    <input type="number" name="Semester" id="Semester" class="form-input" value="<?= isset($_POST['Semester']) ? intval($_POST['Semester']) : 8 ?>" min="1" max="12">
-                                    <span class="error-msg" id="semError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a semester between 1 and 12.</span>
-                                </div>
-                            </div>
-                            <!-- Supervisor block -->
-                            <div id="supervisorFieldsStep6" style="display: none;">
-                                <div class="form-group">
-                                    <label for="Jawatan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Academic Designation</label>
-                                    <input type="text" name="Jawatan" id="Jawatan" class="form-input" placeholder="e.g. Senior Lecturer" value="<?= isset($_POST['Jawatan']) ? sanitize($_POST['Jawatan']) : '' ?>">
-                                    <span class="error-msg" id="jawatanError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter designation.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 7: Password -->
-                        <div class="wizard-step" id="step7">
-                            <div class="form-group">
-                                <label for="Katalaluan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Password</label>
-                                <input type="password" name="Katalaluan" id="Katalaluan" class="form-input" placeholder="••••••••">
-                                <span class="error-msg" id="pwError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Password must be at least 6 characters.</span>
-                            </div>
-                        </div>
-
-                        <!-- Stepper navigation buttons -->
-                        <div class="wizard-actions" id="wizardActionsPanel" style="display: none;">
-                            <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="padding: 0.6rem 1.5rem; font-size: 0.85rem;"><i class="fa-solid fa-chevron-left"></i> Back</button>
-                            <button type="button" class="btn btn-portal-primary" id="nextBtn" onclick="nextStep()" style="padding: 0.6rem 2rem; font-size: 0.85rem;">Next <i class="fa-solid fa-chevron-right"></i></button>
-                            <button type="submit" class="btn btn-portal-primary" id="submitRegBtn" style="padding: 0.6rem 2rem; font-size: 0.85rem; display: none;"><i class="fa-solid fa-circle-check"></i> Complete Registration</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="reg-submit-row">
+                        <p class="reg-login-link">Already have an account? <a href="login.php">Log In</a></p>
+                        <button type="submit" class="btn-reg-submit">
+                            <i class="fa-solid fa-user-plus"></i> Create Student Account
+                        </button>
+                    </div>
+                </form>
             </div>
-        <?php endif; ?>
-    </div>
+
+            <!-- ── SUPERVISOR FORM ── -->
+            <div id="panel-Supervisor" class="role-panel">
+                <form action="register.php" method="POST" autocomplete="off" id="supervisorForm" onsubmit="return validateSupervisorForm()">
+                    <input type="hidden" name="role" value="Supervisor">
+
+                    <div class="reg-section">
+                        <div class="reg-section-title">Personal Information</div>
+                        <div class="reg-grid-2">
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="sup_Nama">Full Name <span style="color:#dc2626;">*</span></label>
+                                <input type="text" name="Nama" id="sup_Nama" class="reg-input" placeholder="e.g. Dr. Samuel Alabi" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor') ? sanitize($_POST['Nama'] ?? '') : '' ?>">
+                            </div>
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="sup_Email">Email Address <span style="color:#dc2626;">*</span></label>
+                                <input type="email" name="Email" id="sup_Email" class="reg-input" placeholder="e.g. lecturer@oduduwa.edu.ng" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor') ? sanitize($_POST['Email'] ?? '') : '' ?>">
+                            </div>
+                        </div>
+                        <div class="reg-form-group">
+                            <label class="reg-label" for="sup_Phone">Phone Number</label>
+                            <input type="text" name="Phone" id="sup_Phone" class="reg-input" placeholder="e.g. +234 812 345 6789" value="<?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor') ? sanitize($_POST['Phone'] ?? '') : '' ?>">
+                        </div>
+                    </div>
+
+                    <div class="reg-section">
+                        <div class="reg-section-title">Academic Details</div>
+                        <div class="reg-grid-2">
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="sup_No_staf">Lecturer Username <span style="color:#dc2626;">*</span></label>
+                                <input type="text" name="No_staf" id="sup_No_staf" class="reg-input" placeholder="e.g. dralabi" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor') ? sanitize($_POST['No_staf'] ?? '') : '' ?>">
+                            </div>
+                            <div class="reg-form-group">
+                                <label class="reg-label" for="sup_Jawatan">Academic Designation <span style="color:#dc2626;">*</span></label>
+                                <input type="text" name="Jawatan" id="sup_Jawatan" class="reg-input" placeholder="e.g. Senior Lecturer" required value="<?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor') ? sanitize($_POST['Jawatan'] ?? '') : '' ?>">
+                            </div>
+                        </div>
+                        <div class="reg-form-group">
+                            <label class="reg-label" for="sup_Specialization">Area of Specialization</label>
+                            <select name="Specialization" id="sup_Specialization" class="reg-input">
+                                <option value="">-- Select --</option>
+                                <option value="General Computer Science" <?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor' && ($_POST['Specialization'] ?? '') === 'General Computer Science') ? 'selected' : '' ?>>General Computer Science</option>
+                                <option value="Software Engineering" <?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor' && ($_POST['Specialization'] ?? '') === 'Software Engineering') ? 'selected' : '' ?>>Software Engineering</option>
+                                <option value="Information Technology" <?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor' && ($_POST['Specialization'] ?? '') === 'Information Technology') ? 'selected' : '' ?>>Information Technology</option>
+                                <option value="Cybersecurity" <?= (isset($_POST['role']) && $_POST['role'] === 'Supervisor' && ($_POST['Specialization'] ?? '') === 'Cybersecurity') ? 'selected' : '' ?>>Cybersecurity</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="reg-section">
+                        <div class="reg-section-title">Account Security</div>
+                        <div class="reg-form-group">
+                            <label class="reg-label" for="sup_Katalaluan">Password <span style="color:#dc2626;">*</span></label>
+                            <input type="password" name="Katalaluan" id="sup_Katalaluan" class="reg-input" placeholder="Minimum 6 characters" required>
+                            <span id="sup_pwError" style="display:none; color:#dc2626; font-size:0.78rem; margin-top:0.25rem;">Password must be at least 6 characters.</span>
+                        </div>
+                    </div>
+
+                    <div class="reg-submit-row">
+                        <p class="reg-login-link">Already have an account? <a href="login.php">Log In</a></p>
+                        <button type="submit" class="btn-reg-submit">
+                            <i class="fa-solid fa-user-plus"></i> Create Supervisor Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <?php endif; ?>
 
     <script>
-        const startRegBtn = document.getElementById('startRegisterBtn');
-        if (startRegBtn) {
-            startRegBtn.addEventListener('click', () => {
-                document.getElementById('registerActions').style.display = 'none';
-                document.getElementById('registrationFormFields').style.display = 'block';
-                updateStepUI();
+        // Switch role tab and show corresponding form panel
+        function switchRole(role) {
+            document.querySelectorAll('.reg-role-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
             });
+            document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+
+            document.getElementById('tab-' + role).classList.add('active');
+            document.getElementById('tab-' + role).setAttribute('aria-selected', 'true');
+            document.getElementById('panel-' + role).classList.add('active');
         }
 
-        // Stepper State variables
-        let currentStep = 0;
-        const totalSteps = 7;
-        let selectedRole = '';
+        // Restore role tab on server-side error
+        <?php if (!empty($register_error) && isset($_POST['role'])): ?>
+        window.addEventListener('DOMContentLoaded', () => {
+            switchRole('<?= sanitize($_POST['role']) ?>');
+        });
+        <?php endif; ?>
 
-        // Handles pre-screening role card selection in Step 0
-        function selectRole(role) {
-            selectedRole = role;
-            document.getElementById('roleInput').value = role;
-
-            // Highlight selected card
-            document.querySelectorAll('.role-picker-card').forEach(card => {
-                if (card.getAttribute('data-role') === role) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
-                }
-            });
-
-            // Configure dynamic block fields visibility
-            const matricStep5 = document.getElementById('studentFieldsStep5');
-            const staffStep5 = document.getElementById('supervisorFieldsStep5');
-            const semStep6 = document.getElementById('studentFieldsStep6');
-            const jawStep6 = document.getElementById('supervisorFieldsStep6');
-
-            if (role === 'Student') {
-                matricStep5.style.display = 'block';
-                staffStep5.style.display = 'none';
-                semStep6.style.display = 'block';
-                jawStep6.style.display = 'none';
-            } else {
-                matricStep5.style.display = 'none';
-                staffStep5.style.display = 'block';
-                semStep6.style.display = 'none';
-                jawStep6.style.display = 'block';
-            }
-
-            // Move to Step 1 automatically after select
-            setTimeout(() => {
-                currentStep = 1;
-                updateStepUI();
-            }, 300);
-        }
-
-        // Navigate back one step
-        function prevStep() {
-            if (currentStep > 0) {
-                currentStep--;
-                updateStepUI();
-            }
-        }
-
-        // Navigate next check with validation
-        function nextStep() {
-            if (validateCurrentStep()) {
-                if (currentStep < totalSteps) {
-                    currentStep++;
-                    updateStepUI();
-                }
-            }
-        }
-
-        // Validate the active step input fields
-        function validateCurrentStep() {
-            // Hide all errors
-            document.querySelectorAll('.error-msg').forEach(msg => msg.style.display = 'none');
-
-            if (currentStep === 1) {
-                const name = document.getElementById('Nama').value.trim();
-                if (name === '') {
-                    document.getElementById('nameError').style.display = 'block';
-                    return false;
-                }
-            } else if (currentStep === 2) {
-                const email = document.getElementById('Email').value.trim();
-                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!regex.test(email)) {
-                    document.getElementById('emailError').style.display = 'block';
-                    return false;
-                }
-            } else if (currentStep === 3) {
-                const phone = document.getElementById('Phone').value.trim();
-                if (phone === '') {
-                    document.getElementById('phoneError').style.display = 'block';
-                    return false;
-                }
-            } else if (currentStep === 4) {
-                const spec = document.getElementById('Specialization').value;
-                if (spec === '') {
-                    document.getElementById('specError').style.display = 'block';
-                    return false;
-                }
-            } else if (currentStep === 5) {
-                if (selectedRole === 'Student') {
-                    const matric = document.getElementById('No_matrik').value.trim();
-                    if (matric === '') {
-                        document.getElementById('matricError').style.display = 'block';
-                        return false;
-                    }
-                } else {
-                    const staff = document.getElementById('No_staf').value.trim();
-                    if (staff === '') {
-                        document.getElementById('staffError').style.display = 'block';
-                        return false;
-                    }
-                }
-            } else if (currentStep === 6) {
-                if (selectedRole === 'Student') {
-                    const sem = parseInt(document.getElementById('Semester').value);
-                    if (isNaN(sem) || sem < 1 || sem > 12) {
-                        document.getElementById('semError').style.display = 'block';
-                        return false;
-                    }
-                } else {
-                    const jawatan = document.getElementById('Jawatan').value.trim();
-                    if (jawatan === '') {
-                        document.getElementById('jawatanError').style.display = 'block';
-                        return false;
-                    }
-                }
-            } else if (currentStep === 7) {
-                const pw = document.getElementById('Katalaluan').value;
-                if (pw.length < 6) {
-                    document.getElementById('pwError').style.display = 'block';
-                    return false;
-                }
+        // Student form validation
+        function validateStudentForm() {
+            const pw = document.getElementById('s_Katalaluan').value;
+            if (pw.length < 6) {
+                document.getElementById('s_pwError').style.display = 'block';
+                document.getElementById('s_Katalaluan').focus();
+                return false;
             }
             return true;
         }
 
-        // Update active step wizard elements and progress bar width
-        function updateStepUI() {
-            // Show/hide steps
-            document.querySelectorAll('.wizard-step').forEach((step, idx) => {
-                if (idx === currentStep) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active');
-                }
-            });
-
-            // Update Progress bar indicators
-            const progressBar = document.getElementById('progressBar');
-            const stepIndicator = document.getElementById('stepIndicator');
-            const actionPanel = document.getElementById('wizardActionsPanel');
-
-            if (currentStep === 0) {
-                actionPanel.style.display = 'none';
-                progressBar.style.width = '0%';
-                stepIndicator.innerText = 'Select Role';
-            } else {
-                actionPanel.style.display = 'flex';
-                const percent = Math.round((currentStep / totalSteps) * 100);
-                progressBar.style.width = percent + '%';
-                
-                // Set step labels
-                let label = '';
-                switch (currentStep) {
-                    case 1: label = 'Full Name'; break;
-                    case 2: label = 'Email Address'; break;
-                    case 3: label = 'Phone Number'; break;
-                    case 4: label = 'Specialization'; break;
-                    case 5: label = (selectedRole === 'Student') ? 'Matric Number' : 'Lecturer Username'; break;
-                    case 6: label = (selectedRole === 'Student') ? 'Current Semester' : 'Designation'; break;
-                    case 7: label = 'Password Securing'; break;
-                }
-                stepIndicator.innerText = `Step ${currentStep} of ${totalSteps}: ${label}`;
-
-                // Control button indicators visibility
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const submitBtn = document.getElementById('submitRegBtn');
-
-                if (currentStep === totalSteps) {
-                    nextBtn.style.display = 'none';
-                    submitBtn.style.display = 'block';
-                } else {
-                    nextBtn.style.display = 'block';
-                    submitBtn.style.display = 'none';
-                }
-
-                // Can go back to step 0
-                prevBtn.style.display = 'block';
+        // Supervisor form validation
+        function validateSupervisorForm() {
+            const pw = document.getElementById('sup_Katalaluan').value;
+            if (pw.length < 6) {
+                document.getElementById('sup_pwError').style.display = 'block';
+                document.getElementById('sup_Katalaluan').focus();
+                return false;
             }
+            return true;
         }
-
-        // If validation errors are returned from PHP POST session, initialize form
-        <?php if (!empty($register_error)): ?>
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('registerActions').style.display = 'none';
-            document.getElementById('registrationFormFields').style.display = 'block';
-            
-            // Re-select role state dynamically
-            const oldRole = "<?= isset($_POST['role']) ? sanitize($_POST['role']) : '' ?>";
-            if (oldRole !== '') {
-                selectRole(oldRole);
-                // Advance to final step so errors are immediately editable
-                currentStep = 7;
-                updateStepUI();
-            }
-        });
-        <?php endif; ?>
     </script>
 </body>
 </html>
