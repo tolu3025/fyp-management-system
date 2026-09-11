@@ -1691,5 +1691,394 @@ body.portal-theme .hero-title {
     }
 }
 
+/* ==========================================
+   UI/UX PREMIUM ENHANCEMENT LAYER
+   OUI CS FYP Portal — Visual Upgrade
+   ========================================== */
+
+/* --- 1. HERO SECTION: Animated Mesh Gradient Background --- */
+body.portal-theme .hero-section {
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(30, 64, 175, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(180, 83, 9, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+        linear-gradient(160deg, #ffffff 0%, #f8fafc 60%, #eef2ff 100%) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle animated mesh overlay */
+body.portal-theme .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(30, 64, 175, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 64, 175, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.portal-theme .hero-section > div {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- 2. UNIVERSITY BADGE CHIP --- */
+.uni-badge-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.08) 0%, rgba(180, 83, 9, 0.06) 100%);
+    border: 1px solid rgba(30, 64, 175, 0.18);
+    border-radius: 9999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.4px;
+    margin-bottom: 1.25rem;
+    width: fit-content;
+}
+
+.uni-badge-chip i {
+    color: var(--secondary);
+    font-size: 0.8rem;
+}
+
+/* --- 3. FLOATING ILLUSTRATION FRAME --- */
+.portal-illustration-frame {
+    width: 100%;
+    position: relative;
+    filter: drop-shadow(0 20px 40px rgba(30, 64, 175, 0.14));
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portal-illustration-frame:hover {
+    transform: translateY(-6px) rotate(0.5deg);
+}
+
+.portal-illustration-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg);
+}
+
+/* Floating badge behind illustration */
+.portal-illustration-frame::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.06), rgba(180, 83, 9, 0.04));
+    border-radius: calc(var(--radius-lg) + 12px);
+    border: 1px solid rgba(30, 64, 175, 0.08);
+    z-index: -1;
+}
+
+/* --- 4. STAT CARDS: Icon Badges & Color Strips --- */
+.stat-card-enhanced {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--stat-accent, var(--primary));
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.stat-card-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--stat-accent, rgba(30, 64, 175, 0.2));
+}
+
+.stat-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+    background: var(--stat-badge-bg, rgba(30, 64, 175, 0.08));
+    color: var(--stat-accent, var(--primary));
+    transition: var(--transition);
+}
+
+.stat-card-enhanced:hover .stat-icon-badge {
+    background: var(--stat-accent, var(--primary));
+    color: white;
+    transform: scale(1.08) rotate(-3deg);
+}
+
+.stat-card-enhanced .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--bg-dark);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+}
+
+.stat-card-enhanced .stat-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+/* --- 5. GLASSMORPHISM REGISTER WIZARD CARD --- */
+body.register-cover-page {
+    background:
+        radial-gradient(ellipse 70% 60% at 20% 30%, rgba(30, 64, 175, 0.55) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(180, 83, 9, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(15, 23, 42, 0.6) 0%, transparent 100%),
+        linear-gradient(135deg, #0f1729 0%, #1e3a8a 40%, #7c3aed 100%) !important;
+    background-size: cover !important;
+}
+
+body.register-cover-page::before {
+    background:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") !important;
+    opacity: 1 !important;
+}
+
+.auth-card.glass-card {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow:
+        0 8px 32px rgba(15, 23, 42, 0.2),
+        0 2px 8px rgba(15, 23, 42, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.btn-register-start {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.2) !important;
+    padding: 1rem 3rem !important;
+    font-size: 1rem !important;
+}
+
+.btn-register-start:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* --- 6. LOGIN PAGE: Branded Illustration Pane Overlay --- */
+.auth-illustration-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(15, 23, 42, 0.75) 0%,
+        rgba(30, 64, 175, 0.6) 40%,
+        rgba(180, 83, 9, 0.4) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    text-align: center;
+    color: white;
+}
+
+.auth-illustration-overlay .brand-crest {
+    width: 72px;
+    height: 72px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    backdrop-filter: blur(8px);
+    color: #fbbf24;
+}
+
+.auth-illustration-overlay .brand-university {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.auth-illustration-overlay .brand-dept {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: white;
+}
+
+.auth-illustration-overlay .brand-desc {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    max-width: 300px;
+    margin: 0 auto 2rem;
+}
+
+.auth-illustration-overlay .brand-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #fbbf24, rgba(251, 191, 36, 0.3));
+    border-radius: 9999px;
+    margin: 0 auto 2rem;
+}
+
+.auth-illustration-overlay .feature-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+    max-width: 260px;
+}
+
+.auth-illustration-overlay .feature-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.auth-illustration-overlay .feature-pill i {
+    color: #fbbf24;
+    font-size: 0.9rem;
+    width: 16px;
+    text-align: center;
+}
+
+/* --- 7. DASHBOARD CARD HEADERS: Left-Border Accent --- */
+.card-header {
+    border-left: 4px solid var(--primary) !important;
+    padding-left: calc(2rem - 4px) !important;
+}
+
+/* Role-specific card accent colors */
+body.hod-view .card-header { border-left-color: var(--secondary) !important; }
+body.supervisor-view .card-header { border-left-color: #7c3aed !important; }
+body.student-view .card-header { border-left-color: #059669 !important; }
+
+/* --- 8. BUTTON GLOW PULSE (submit / primary CTA) --- */
+.btn-portal-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-portal-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+@keyframes subtlePulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25); }
+    50% { box-shadow: 0 4px 22px rgba(30, 58, 138, 0.45); }
+}
+
+.btn-portal-primary:not(:hover) {
+    animation: subtlePulse 3s ease-in-out infinite;
+}
+
+/* --- 9. STAT NUMBER COUNT-UP ANIMATION --- */
+.stat-number[data-target] {
+    animation: countUp 0.1s ease-out forwards;
+}
+
+@keyframes countUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 10. SIDEBAR: Subtle gradient bottom glow --- */
+.sidebar {
+    background: linear-gradient(
+        180deg,
+        #0f172a 0%,
+        #0f172a 70%,
+        rgba(30, 64, 175, 0.08) 100%
+    ) !important;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.12) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Sidebar active link: gold left indicator + gradient fill */
+.sidebar-link.active {
+    background: linear-gradient(90deg, rgba(180, 83, 9, 0.18) 0%, rgba(30, 64, 175, 0.06) 100%) !important;
+    border-left: 3px solid #d97706 !important;
+    color: #fbbf24 !important;
+}
+
+.sidebar-link.active i {
+    color: #fbbf24 !important;
+}
+
+/* --- 11. TOP NAV: subtle bottom gradient accent --- */
+.top-nav {
+    border-bottom: 1px solid var(--border) !important;
+    background: white !important;
+    box-shadow: 0 1px 0 var(--border), 0 4px 12px rgba(30, 64, 175, 0.03) !important;
+}
+
+/* --- 12. LANDING MODULE CARDS: Always-visible top strip --- */
+body.portal-theme .portal-card {
+    border-top: 3px solid transparent !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease !important;
+}
+
+body.portal-theme .portal-card:hover {
+    border-top-color: var(--primary) !important;
+    box-shadow: 0 16px 32px -8px rgba(30, 64, 175, 0.12) !important;
+}
+
+/* --- 13. RESPONSIVE: hide badge chip on very small screens --- */
+@media (max-width: 480px) {
+    .uni-badge-chip { display: none; }
+    .auth-illustration-overlay .feature-pills { display: none; }
+}
 
 

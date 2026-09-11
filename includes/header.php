@@ -36,7 +36,7 @@ $notifications = $stmt->fetchAll();
     <!-- CSS Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="<?= $user_role === 'HOD' ? 'hod-view' : ($user_role === 'Supervisor' ? 'supervisor-view' : 'student-view') ?>">
     <div class="dashboard-wrapper">
         <!-- Include Navigation Sidebar -->
         <?php include_once __DIR__ . '/nav.php'; ?>

@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- 2. Dynamic Multi-Step Registration Stepper Form Card -->
             <div id="registrationFormFields" style="display: none; width: 100%;">
-                <div class="auth-card" style="text-align: left; max-width: 465px; margin: 0 auto;">
+                <div class="auth-card glass-card" style="text-align: left; max-width: 465px; margin: 0 auto;">
                     
                     <!-- Progress bar stepper indicator -->
                     <span class="wizard-step-indicator" id="stepIndicator">Step 1 of 7</span>

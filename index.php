@@ -71,6 +71,10 @@ try {
             <!-- Left Pane: Hero Details -->
             <div>
                 <span style="font-family: monospace; font-size: 0.9rem; color: var(--primary); text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; display: block; margin-bottom: 0.75rem;">[ COMPUTER SCIENCE DEPARTMENT PORTAL ]</span>
+                <div class="uni-badge-chip">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Oduduwa University Ipetumodu &middot; Est. 1980 &middot; Osun State
+                </div>
                 <h1 class="hero-title">Final Year Project Management System</h1>
                 <p class="hero-desc">A centralized tracking portal for final year project submissions, task management, and reviews at Oduduwa University Ipetumodu.</p>
                 <div class="hero-actions" style="justify-content: flex-start; gap: 1rem; margin-top: 2rem;">
@@ -93,17 +97,20 @@ try {
         <div style="max-width: 1000px; margin: 0 auto;">
             <span style="font-family: monospace; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; display: block; text-align: center; margin-bottom: 2.5rem;">CURRENT PORTAL STATISTICS</span>
             <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-                <div class="portal-card" style="text-align: center; background: white;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Registered Students</div>
-                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary);"><?= $student_count ?></div>
+                <div class="stat-card-enhanced" style="--stat-accent: #1e40af; --stat-badge-bg: rgba(30, 64, 175, 0.08);">
+                    <div class="stat-icon-badge"><i class="fa-solid fa-users"></i></div>
+                    <div class="stat-number"><?= $student_count ?></div>
+                    <div class="stat-label">Registered Students</div>
                 </div>
-                <div class="portal-card" style="text-align: center; background: white;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Supervisors (Lecturers)</div>
-                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);"><?= $supervisor_count ?></div>
+                <div class="stat-card-enhanced" style="--stat-accent: #b45309; --stat-badge-bg: rgba(180, 83, 9, 0.08);">
+                    <div class="stat-icon-badge"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <div class="stat-number"><?= $supervisor_count ?></div>
+                    <div class="stat-label">Supervisors (Lecturers)</div>
                 </div>
-                <div class="portal-card" style="text-align: center; background: white;">
-                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Active Topics</div>
-                    <div style="font-size: 2.5rem; font-weight: 800; color: #10b981;"><?= $project_count ?></div>
+                <div class="stat-card-enhanced" style="--stat-accent: #059669; --stat-badge-bg: rgba(5, 150, 105, 0.08);">
+                    <div class="stat-icon-badge"><i class="fa-solid fa-folder-open"></i></div>
+                    <div class="stat-number"><?= $project_count ?></div>
+                    <div class="stat-label">Active Topics</div>
                 </div>
             </div>
         </div>

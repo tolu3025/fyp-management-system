@@ -136,8 +136,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
-        <!-- 2. Right Pane: Background illustration covering form initially -->
-        <div class="auth-illustration-pane" id="illustrationPane"></div>
+        <!-- 2. Right Pane: Background illustration with OUI branded overlay -->
+        <div class="auth-illustration-pane" id="illustrationPane">
+            <div class="auth-illustration-overlay">
+                <div class="brand-crest">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <p class="brand-university">Oduduwa University · Ipetumodu, Osun State</p>
+                <h2 class="brand-dept">Department of<br>Computer Science</h2>
+                <div class="brand-divider"></div>
+                <p class="brand-desc">A centralized portal for managing Final Year Projects — connecting students, supervisors, and the department seamlessly.</p>
+                <div class="feature-pills">
+                    <div class="feature-pill"><i class="fa-solid fa-file-circle-check"></i> Track FYP submissions & milestones</div>
+                    <div class="feature-pill"><i class="fa-solid fa-comments"></i> Supervisor feedback & endorsement</div>
+                    <div class="feature-pill"><i class="fa-solid fa-chart-line"></i> HOD progress monitoring</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
