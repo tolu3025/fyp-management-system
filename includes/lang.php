@@ -5,11 +5,11 @@
 $lang_dict = [
     'en' => [
         // Branding & Headers
-        'system_title' => 'Computer Science FYP Portal — Oduduwa University',
-        'login_title' => 'CS Department FYP Portal',
-        'login_subtitle' => 'Oduduwa University Ipetumodu',
+        'system_title' => 'Computer Science FYP Portal | Oduduwa University',
+        'login_title' => 'OUI CS FYP Portal',
+        'login_subtitle' => 'Department of Computer Science, Oduduwa University',
         'dept_title' => 'Department of Computer Science',
-        'college_title' => 'Ramon Adedoyin College of Natural and Applied Sciences',
+        'college_title' => 'Ramon Adedoyin College of Natural and Applied Sciences, OUI',
         
         // Navigation Links
         'dashboard' => 'Dashboard',

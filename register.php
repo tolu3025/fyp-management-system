@@ -162,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <!-- Step 0: Pre-screening role cards picker -->
                         <div class="wizard-step active" id="step0">
-                            <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem;">Select Role</h3>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Choose your registry category to initialize form parameters</p>
+                            <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem;">Account Type</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">Select your account type to continue with registration</p>
                             <div class="role-picker-grid" id="rolePicker" style="margin: 0;">
                                 <div class="role-picker-card" data-role="Student" onclick="selectRole('Student')" style="margin: 0;">
                                     <i class="fa-solid fa-user-graduate"></i>
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Step 1: Full Name -->
                         <div class="wizard-step" id="step1">
                             <div class="form-group">
-                                <label for="Nama" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">What is your Full Name?</label>
+                                <label for="Nama" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Full Name</label>
                                 <input type="text" name="Nama" id="Nama" class="form-input" placeholder="e.g. Adekunle Tobi" value="<?= isset($_POST['Nama']) ? sanitize($_POST['Nama']) : '' ?>">
                                 <span class="error-msg" id="nameError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter your full name.</span>
                             </div>
@@ -188,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Step 2: Email Address -->
                         <div class="wizard-step" id="step2">
                             <div class="form-group">
-                                <label for="Email" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your Email Address</label>
+                                <label for="Email" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Email Address</label>
                                 <input type="email" name="Email" id="Email" class="form-input" placeholder="e.g. user@oduduwa.edu.ng" value="<?= isset($_POST['Email']) ? sanitize($_POST['Email']) : '' ?>">
                                 <span class="error-msg" id="emailError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a valid email address.</span>
                             </div>
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Step 3: Phone Number -->
                         <div class="wizard-step" id="step3">
                             <div class="form-group">
-                                <label for="Phone" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your Phone Number</label>
+                                <label for="Phone" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Phone Number</label>
                                 <input type="text" name="Phone" id="Phone" class="form-input" placeholder="e.g. +234 812 345 6789" value="<?= isset($_POST['Phone']) ? sanitize($_POST['Phone']) : '' ?>">
                                 <span class="error-msg" id="phoneError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a phone number.</span>
                             </div>
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Step 4: Specialization / Program Option -->
                         <div class="wizard-step" id="step4">
                             <div class="form-group">
-                                <label for="Specialization" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Choose your Area of Specialization</label>
+                                <label for="Specialization" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Area of Specialization</label>
                                 <select name="Specialization" id="Specialization" class="form-input">
                                     <option value="">-- Choose Option --</option>
                                     <option value="General Computer Science" <?= (isset($_POST['Specialization']) && $_POST['Specialization'] === 'General Computer Science') ? 'selected' : '' ?>>General Computer Science</option>
@@ -223,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Student block -->
                             <div id="studentFieldsStep5" style="display: none;">
                                 <div class="form-group">
-                                    <label for="No_matrik" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your Matric Number</label>
+                                    <label for="No_matrik" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Matric Number</label>
                                     <input type="text" name="No_matrik" id="No_matrik" class="form-input" placeholder="e.g. CSC/2022/001" value="<?= isset($_POST['No_matrik']) ? sanitize($_POST['No_matrik']) : '' ?>">
                                     <span class="error-msg" id="matricError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter your matric number.</span>
                                 </div>
@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Supervisor block -->
                             <div id="supervisorFieldsStep5" style="display: none;">
                                 <div class="form-group">
-                                    <label for="No_staf" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your Lecturer Username</label>
+                                    <label for="No_staf" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Lecturer Username</label>
                                     <input type="text" name="No_staf" id="No_staf" class="form-input" placeholder="e.g. dralabi" value="<?= isset($_POST['No_staf']) ? sanitize($_POST['No_staf']) : '' ?>">
                                     <span class="error-msg" id="staffError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a lecturer username.</span>
                                 </div>
@@ -243,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Student block -->
                             <div id="studentFieldsStep6" style="display: none;">
                                 <div class="form-group">
-                                    <label for="Semester" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your current Semester</label>
+                                    <label for="Semester" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Current Semester</label>
                                     <input type="number" name="Semester" id="Semester" class="form-input" value="<?= isset($_POST['Semester']) ? intval($_POST['Semester']) : 8 ?>" min="1" max="12">
                                     <span class="error-msg" id="semError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter a semester between 1 and 12.</span>
                                 </div>
@@ -251,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Supervisor block -->
                             <div id="supervisorFieldsStep6" style="display: none;">
                                 <div class="form-group">
-                                    <label for="Jawatan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Enter your academic Designation</label>
+                                    <label for="Jawatan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Academic Designation</label>
                                     <input type="text" name="Jawatan" id="Jawatan" class="form-input" placeholder="e.g. Senior Lecturer" value="<?= isset($_POST['Jawatan']) ? sanitize($_POST['Jawatan']) : '' ?>">
                                     <span class="error-msg" id="jawatanError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Please enter designation.</span>
                                 </div>
@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Step 7: Password -->
                         <div class="wizard-step" id="step7">
                             <div class="form-group">
-                                <label for="Katalaluan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Set password to secure account</label>
+                                <label for="Katalaluan" class="form-label" style="font-size: 1rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">Password</label>
                                 <input type="password" name="Katalaluan" id="Katalaluan" class="form-input" placeholder="••••••••">
                                 <span class="error-msg" id="pwError" style="color: #ef4444; font-size: 0.8rem; margin-top: 0.25rem; display: none;">Password must be at least 6 characters.</span>
                             </div>

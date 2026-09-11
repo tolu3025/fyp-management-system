@@ -48,7 +48,7 @@ try {
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>CS FYP Portal</span>
+            <span>OUI CS FYP Portal</span>
         </a>
         <div style="display: flex; align-items: center; gap: 1.5rem;">
             <!-- Language Selector Dropdown -->

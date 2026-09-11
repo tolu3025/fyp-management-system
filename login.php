@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header class="portal-header">
         <a href="index.php" class="portal-logo" style="text-decoration: none;">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>CS FYP Portal</span>
+            <span>OUI CS FYP Portal</span>
         </a>
         <div style="display: flex; align-items: center; gap: 1.5rem;">
             <!-- Language Selector Dropdown -->
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="auth-form-pane">
             <div class="auth-card">
                 <h2>Account Login</h2>
-                <p class="subtitle"><?= __('login_subtitle') ?></p>
+                <p class="subtitle">Department of Computer Science, Oduduwa University</p>
 
                 <?php if (!empty($error)): ?>
                     <div class="alert alert-danger" style="text-align: left;"><i class="fa-solid fa-triangle-exclamation"></i> <?= sanitize($error) ?></div>

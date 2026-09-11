@@ -8,12 +8,12 @@ $role = $_SESSION['user_role'] ?? '';
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <h2><i class="fa-solid fa-laptop-code"></i> CS FYP Portal</h2>
+            <h2><i class="fa-solid fa-laptop-code"></i> OUI CS FYP Portal</h2>
             <button class="mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close Menu">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <p>Oduduwa University</p>
+        <p>Dept. of Computer Science</p>
     </div>
     
     <nav class="sidebar-menu">
